@@ -2,8 +2,7 @@
 
 To Do:
 
-- Replace the app name (currently "groceries") in both package.json files, both package-lock.json files, and in manifest.json
-- Replace logo192.png and favicon.ico with your own icon art (Recommended icon generator: https://favicon.io/)
+- Replace logo192.png and favicon.ico with new icon art (Recommended icon generator: https://favicon.io/)
 
 ---
 

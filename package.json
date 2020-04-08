@@ -1,7 +1,7 @@
 {
-  "name": "groceries",
+  "name": "gamestore",
   "version": "1.0.0",
-  "description": "groceries",
+  "description": "gamestore",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
