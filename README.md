@@ -22,3 +22,20 @@ Dependencies have also been audited to fix all security vulnerabilities.
 ## Notes:
 
 - You will still be able to see console.log's in your development build. They will only be removed from the production build, which is created automatically when you push to heroku.
+
+---
+
+---
+
+# Ecommerce Game Store
+
+## Credits
+
+Stock images:
+
+- 'dice.jpg' by [Ian Gonzalez on Unsplash](https://unsplash.com/photos/oVXMtsMejqo)
+- 'chess1.jpg' by [sk on Unsplash](https://unsplash.com/photos/CNBRg1K9QvQ)
+- 'chess2.jpg' by [Charlie Solorzano on Unsplash](https://unsplash.com/photos/aeXK1IeVVoI)
+- 'puzzle.jpg' by [Joshua Hoehne on Unsplash](https://unsplash.com/photos/jAomkJlKwPI)
+- 'cards.jpg' by [Amanda Jones on Unsplash](https://unsplash.com/photos/P787-xixGio)
+- 'open.jpg' by [Mike Petrucci on Unsplash](https://unsplash.com/photos/c9FQyqIECds)
