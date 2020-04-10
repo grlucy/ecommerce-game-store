@@ -1,13 +1,3 @@
-# MERN Starter Code
-
-To Do:
-
-- Replace logo192.png and favicon.ico with new icon art (Recommended icon generator: https://favicon.io/)
-
----
-
----
-
 # Ecommerce Game Store
 
 Deployed at XX
