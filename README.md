@@ -28,3 +28,4 @@ Stock images:
 - 'puzzle.jpg' by [Joshua Hoehne on Unsplash](https://unsplash.com/photos/jAomkJlKwPI)
 - 'cards.jpg' by [Amanda Jones on Unsplash](https://unsplash.com/photos/P787-xixGio)
 - 'open.jpg' by [Mike Petrucci on Unsplash](https://unsplash.com/photos/c9FQyqIECds)
+- 'dragon.jpg' by [Clint Bustrillos on Unsplash](https://unsplash.com/photos/X-A-LJVAhzk)
