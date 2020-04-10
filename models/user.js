@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       default: "Customer",
+      enum: ["Customer", "Admin"],
     },
     orderHistory: {
       type: Array,
