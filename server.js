@@ -7,7 +7,9 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // database
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dragonsden");
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/dragonsden")
+  .then(() => console.log("DB connected"));
 
 // middlewares
 app.use(express.urlencoded({ extended: true }));
