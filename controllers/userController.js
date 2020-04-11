@@ -9,6 +9,11 @@ exports.signup = (req, res) => {
         err: errorHandler(err),
       });
     }
+
+    // Do not return salt or hashed_password in response
+    user.salt = undefined;
+    user.hashed_password = undefined;
+
     res.json({
       user,
     });
