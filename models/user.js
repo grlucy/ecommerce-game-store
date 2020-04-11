@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
-const uuidv1 = require("uuid/v1");
+const crypto = require("crypto"); // Used to hash password
+const uuidv1 = require("uuid/v1"); // Used to create long, unique string for salt
 
 const userSchema = new mongoose.Schema(
   {
