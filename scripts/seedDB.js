@@ -3,6 +3,9 @@ const db = require("../models");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dragonsden");
 
+// -------------------------------------------------------------------------------------
+// PRODUCTS
+
 const productSeed = [
   {
     name: "Classic Chess Set",
@@ -62,7 +65,7 @@ const productSeed = [
 db.Product.deleteMany({}, function (err) {})
   .then(() => db.Product.collection.insertMany(productSeed))
   .then((data) => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + " product records inserted!");
     process.exit(0);
   })
   .catch((err) => {
