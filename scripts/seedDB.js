@@ -59,7 +59,7 @@ const productSeed = [
   },
 ];
 
-db.Product.remove({})
+db.Product.deleteMany({}, function (err) {})
   .then(() => db.Product.collection.insertMany(productSeed))
   .then((data) => {
     console.log(data.result.n + " records inserted!");
