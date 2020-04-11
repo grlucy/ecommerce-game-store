@@ -8,7 +8,11 @@ const app = express();
 
 // database
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/dragonsden")
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/dragonsden", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("DB connected"));
 
 // middlewares
