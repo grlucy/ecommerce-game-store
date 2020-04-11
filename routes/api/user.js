@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const { userSignupValidator } = require("../../validator");
 
 // Matches with "/api/user"
-router.post("/signup", userController.signup);
+router.post("/signup", userSignupValidator, userController.signup);
 
 module.exports = router;
