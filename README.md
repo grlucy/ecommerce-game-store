@@ -4,9 +4,9 @@ Deployed at XX
 
 ## Description
 
-| Technologies used:                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------- |
-| Node.js, Express, React, MongoDB, Mongoose, mLab, JavaScript, HTML, CSS, Bulma, Adobe XD, Adobe Photoshop, Adobe InDesign |
+| Technologies used:                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js, Express, React, MongoDB, Mongoose, mLab, JavaScript, HTML, CSS, Bulma, Postman, Robo 3T, Adobe XD, Adobe Photoshop, Adobe InDesign |
 
 ## Credits
 
