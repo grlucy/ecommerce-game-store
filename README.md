@@ -22,3 +22,4 @@ Stock images:
 - 'chips.jpg' by [Amanda Jones on Unsplash](https://unsplash.com/photos/K2PAVcngNvY)
 - 'dominos.jpg' by [Jonathan Campos from Pexels](https://www.pexels.com/photo/close-up-photo-of-dominoes-4066131/)
 - 'pawns.jpg' by [Pixabay from Pexels](https://www.pexels.com/photo/focus-photo-of-4-wooden-pawn-figurine-209728/)
+- 'mahjong.jpg' by [Ellicia on Unsplash](https://unsplash.com/photos/rMm0dChKUaI)
