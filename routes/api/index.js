@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
 // API route files
-const userRoutes = require("./user");
+const authRoutes = require("./auth");
 
 // routes middleware - matches "/api"
-router.use("/user", userRoutes);
+router.use("/auth", authRoutes);
 
 module.exports = router;
