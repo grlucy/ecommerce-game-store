@@ -55,7 +55,29 @@ exports.signout = (req, res) => {
   res.json({ message: "Successfully signed out." });
 };
 
+// Middleware to restrict routes to only users that are signed in (have a token)
 exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET,
   userProperty: "auth",
 });
+
+// Middleware that ensures a token can only access matching user id's data
+exports.isAuth = (req, res, next) => {
+  let user = req.profile && req.auth && req.profile._id == req.auth._id;
+  if (!user) {
+    return res.status(403).json({
+      error: "Access denied",
+    });
+  }
+  next();
+};
+
+// Middleware that restricts a route to only users with role === "Admin"
+exports.isAdmin = (req, res, next) => {
+  if (req.profile.role === "Customer") {
+    return res.status(403).json({
+      error: "Access denied",
+    });
+  }
+  next();
+};

@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
-const { requireSignin } = require("../../controllers/authController");
+const {
+  requireSignin,
+  isAuth,
+  isAdmin,
+} = require("../../controllers/authController");
 
 // Matches with "/api/user"
 
