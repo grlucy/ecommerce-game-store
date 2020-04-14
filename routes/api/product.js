@@ -1,5 +1,9 @@
 const router = require("express").Router();
-const { create } = require("../../controllers/productController");
+const {
+  create,
+  productById,
+  read,
+} = require("../../controllers/productController");
 const {
   requireSignin,
   isAuth,
@@ -8,7 +12,12 @@ const {
 const { userById } = require("../../controllers/userController");
 const { productValidator } = require("../../validator");
 
-// Create new product
+// Matches with "/api/product"
+
+// Find one product
+router.get("/:productId", read);
+
+// Create one product
 router.post(
   "/create/:userId",
   requireSignin,
@@ -19,5 +28,6 @@ router.post(
 );
 
 router.param("userId", userById);
+router.param("productId", productById);
 
 module.exports = router;
