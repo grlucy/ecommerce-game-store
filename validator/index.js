@@ -3,8 +3,9 @@ exports.userSignupValidator = (req, res, next) => {
   req
     .check("email", "Email is required")
     .notEmpty()
-    .matches(/.+\@.+\..+/)
-    .withMessage("Email must contain @");
+    .matches(/\S+@\S+\.\S+/)
+    
+    .withMessage("Email must be in the format __@__.__");
   req.check("password", "Password is required").notEmpty();
   req
     .check("password")
