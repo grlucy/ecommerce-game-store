@@ -4,9 +4,9 @@ Deployed at XX
 
 ## Description
 
-| Technologies used:                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------- |
-| Node.js, Express, React, MongoDB, Mongoose, mLab, JavaScript, HTML, CSS, Bulma, Adobe XD, Adobe Photoshop, Adobe InDesign |
+| Technologies used:                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js, Express, React, MongoDB, Mongoose, mLab, JavaScript, HTML, CSS, Bulma, Postman, Robo 3T, Adobe XD, Adobe Photoshop, Adobe InDesign |
 
 ## Credits
 
@@ -23,3 +23,7 @@ Stock images:
 - 'dominos.jpg' by [Jonathan Campos from Pexels](https://www.pexels.com/photo/close-up-photo-of-dominoes-4066131/)
 - 'pawns.jpg' by [Pixabay from Pexels](https://www.pexels.com/photo/focus-photo-of-4-wooden-pawn-figurine-209728/)
 - 'mahjong.jpg' by [Ellicia on Unsplash](https://unsplash.com/photos/rMm0dChKUaI)
+
+Tutorials:
+
+- "MERN Stack React Node Ecommerce" by [Ryan Dhungel on Udemy](https://www.udemy.com/course/react-node-ecommerce/)

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
-const uuidv1 = require("uuid/v1");
+const crypto = require("crypto"); // Used to hash password - this is a built-in Node module
+const { v1: uuidv1 } = require("uuid"); // Used to create long, unique string for salt
 
 const userSchema = new mongoose.Schema(
   {
@@ -47,8 +47,8 @@ userSchema
   });
 
 userSchema.methods = {
-  authenticate: function (plainText) {
-    return this.encryptPassword(plainText) === this.hashed_password;
+  authenticate: function (password) {
+    return this.encryptPassword(password) === this.hashed_password;
   },
 
   encryptPassword: function (password) {
