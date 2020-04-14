@@ -46,6 +46,9 @@ exports.productValidator = (req, res, next) => {
     .notEmpty()
     .isLength({ min: 1, max: 1000 })
     .withMessage("Description must be 1,000 characters or less");
+  if (req.body.image !== "") {
+    req.check("image").isURL().withMessage("Image must be URL");
+  }
 
   const errors = req.validationErrors();
   if (errors) {
