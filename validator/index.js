@@ -21,42 +21,36 @@ exports.userSignupValidator = (req, res, next) => {
 };
 
 exports.productValidator = (req, res, next) => {
-  // Required fields validation
-  if (
-    !req.body.name ||
-    !req.body.price ||
-    !req.body.quantity ||
-    !req.body.category ||
-    !req.body.description
-  ) {
-    return res.status(400).json({
-      error:
-        "Product name, price, category, quantity, and description are required fields",
-    });
-  }
+  req
+    .check("name", "Product name is required")
+    .notEmpty()
+    .isLength({ min: 1, max: 100 })
+    .withMessage("Product name must be 100 characters or less");
+  req
+    .check("price", "Price is required")
+    .notEmpty()
+    .isFloat()
+    .withMessage("Price must be a number");
+  req
+    .check("quantity", "Quantity is required")
+    .notEmpty()
+    .isInt()
+    .withMessage("Quantity must be an integer");
+  req
+    .check("category", "Category is required")
+    .notEmpty()
+    .isLength({ min: 1, max: 100 })
+    .withMessage("Category must be 100 characters or less");
+  req
+    .check("description", "Description is required")
+    .notEmpty()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("Description must be 1,000 characters or less");
 
-  // Field length validation
-  if (req.body.name.length > 100) {
-    return res.status(400).json({
-      error: "Product name must be 100 characters or less",
-    });
-  }
-  if (req.body.category.length > 100) {
-    return res.status(400).json({
-      error: "Product category must be 100 characters or less",
-    });
-  }
-  if (req.body.description.length > 1000) {
-    return res.status(400).json({
-      error: "Product description must be 1,000 characters or less",
-    });
-  }
-
-  // Field type validation
-  if (isNaN(req.body.price) || isNaN(req.body.quantity)) {
-    return res.status(400).json({
-      error: "Product price and quantity must be numbers",
-    });
+  const errors = req.validationErrors();
+  if (errors) {
+    const firstError = errors.map((error) => error.msg)[0];
+    return res.status(400).json({ error: firstError });
   }
 
   next();
