@@ -19,3 +19,45 @@ exports.userSignupValidator = (req, res, next) => {
   }
   next();
 };
+
+exports.productValidator = (req, res, next) => {
+  // Required fields validation
+  if (
+    !req.body.name ||
+    !req.body.price ||
+    !req.body.quantity ||
+    !req.body.category ||
+    !req.body.description
+  ) {
+    return res.status(400).json({
+      error:
+        "Product name, price, category, quantity, and description are required fields",
+    });
+  }
+
+  // Field length validation
+  if (req.body.name.length > 100) {
+    return res.status(400).json({
+      error: "Product name must be 100 characters or less",
+    });
+  }
+  if (req.body.category.length > 100) {
+    return res.status(400).json({
+      error: "Product category must be 100 characters or less",
+    });
+  }
+  if (req.body.description.length > 1000) {
+    return res.status(400).json({
+      error: "Product description must be 1,000 characters or less",
+    });
+  }
+
+  // Field type validation
+  if (isNaN(req.body.price) || isNaN(req.body.quantity)) {
+    return res.status(400).json({
+      error: "Product price and quantity must be numbers",
+    });
+  }
+
+  next();
+};

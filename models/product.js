@@ -18,6 +18,7 @@ const productSchema = new Schema(
       type: String,
       trim: true,
       maxlength: 100,
+      required: true,
     },
     quantity: {
       type: Number,
@@ -27,13 +28,13 @@ const productSchema = new Schema(
     image: {
       type: String,
       trim: true,
-      required: true,
       default: "https://via.placeholder.com/500?text=No+Image+Found",
     },
     description: {
       type: String,
       trim: true,
       maxlength: 1000,
+      required: true,
     },
   },
   { timestamps: true }
