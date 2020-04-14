@@ -36,6 +36,11 @@ const productSchema = new Schema(
       maxlength: 1000,
       required: true,
     },
+    numberSold: {
+      type: Number,
+      trim: true,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

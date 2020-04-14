@@ -4,9 +4,28 @@ Deployed at XX
 
 ## Description
 
-| Technologies used:                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Node.js, Express, React, MongoDB, Mongoose, mLab, JavaScript, HTML, CSS, Bulma, Postman, Robo 3T, Adobe XD, Adobe Photoshop, Adobe InDesign |
+A website for a local game store that enables online transactions and curbside pickup scheduling
+
+## Technologies
+
+| Front End | Back End                                   | Testing | Deployment |
+| --------- | ------------------------------------------ | ------- | ---------- |
+| React     | JavaScript                                 | Postman | Git        |
+| Axios     | MongoDB                                    | Robo 3T | Heroku     |
+| HTML      | Mongoose                                   |         | mLab       |
+| CSS       | Express                                    |         |            |
+| Bulma     | Node.js                                    |         |            |
+|           | Password hashing with crypto, uuid         |         |            |
+|           | Express-validator                          |         |            |
+|           | User tokens with express-jwt, jsonwebtoken |         |            |
+|           | Cookie-parser                              |         |            |
+|           | Dotenv                                     |         |            |
+
+| Project Management         | Wireframing & Graphics |
+| -------------------------- | ---------------------- |
+| GitHub (Issues & Projects) | Adobe XD               |
+| Slack                      | Adobe Illustrator      |
+| Google Drive               | Adobe Photoshop        |
 
 ## Credits
 
