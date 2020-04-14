@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
@@ -14,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path="/account" component={Account} />
           <Route exact path="/admin" component={Admin} />
@@ -23,7 +22,7 @@ class App extends Component {
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/store" component={Store} />
-        </div>
+        </Switch>
       </Router>
     );
   }
