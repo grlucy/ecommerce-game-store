@@ -44,3 +44,27 @@ exports.remove = (req, res) => {
     });
   });
 };
+
+exports.update = (req, res) => {
+  req.product.name = req.body.name;
+  req.product.price = req.body.price;
+  req.product.category = req.body.category;
+  req.product.quantity = req.body.quantity;
+  req.product.description = req.body.description;
+  if (!req.body.image) {
+    req.product.image = "https://via.placeholder.com/500?text=No+Image+Found";
+  } else {
+    req.product.image = req.body.image;
+  }
+  const product = req.product;
+  product.save((err, product) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err),
+      });
+    }
+    res.json({
+      product,
+    });
+  });
+};
