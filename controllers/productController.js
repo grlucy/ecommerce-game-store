@@ -71,13 +71,17 @@ exports.update = (req, res) => {
 
 // Get list of products that can be filtered by category and/or in-stock-only
 // and that will be sorted by descending popularity (default) or ascending price
+// Example routes:
+// /api/products/list
+// /api/products/list?sort=popularity
+// /api/products/list?category=Board Games&available=true&sort=price
 exports.list = (req, res) => {
   let selector = {};
   if (req.query.category) {
-    selector[category] = req.query.category;
+    selector["category"] = req.query.category;
   }
   if (req.query.available) {
-    selector[quantity] = { $gte: 1 };
+    selector["quantity"] = { $gte: 1 };
   }
   if (req.query.sort === "price") {
     Product.find(selector)
