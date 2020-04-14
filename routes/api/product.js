@@ -3,6 +3,7 @@ const {
   create,
   productById,
   read,
+  remove,
 } = require("../../controllers/productController");
 const {
   requireSignin,
@@ -26,6 +27,9 @@ router.post(
   productValidator,
   create
 );
+
+// Delete one product
+router.delete("/:productId/:userId", requireSignin, isAuth, isAdmin, remove);
 
 router.param("userId", userById);
 router.param("productId", productById);
