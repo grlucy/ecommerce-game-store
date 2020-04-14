@@ -68,3 +68,38 @@ exports.update = (req, res) => {
     });
   });
 };
+
+// Get list of products that can be filtered by category and/or in-stock-only
+// and that will be sorted by descending popularity (default) or ascending price
+exports.list = (req, res) => {
+  let selector = {};
+  if (req.query.category) {
+    selector[category] = req.query.category;
+  }
+  if (req.query.available) {
+    selector[quantity] = { $gte: 1 };
+  }
+  if (req.query.sort === "price") {
+    Product.find(selector)
+      .sort({ price: 1 })
+      .exec((err, products) => {
+        if (err) {
+          return res.status(400).json({
+            error: "Products not found",
+          });
+        }
+        res.json(products);
+      });
+  } else {
+    Product.find(selector)
+      .sort({ numberSold: -1 })
+      .exec((err, products) => {
+        if (err) {
+          return res.status(400).json({
+            error: "Products not found",
+          });
+        }
+        res.json(products);
+      });
+  }
+};
