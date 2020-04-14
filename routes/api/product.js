@@ -8,7 +8,7 @@ const {
 const { userById } = require("../../controllers/userController");
 
 // Create new product
-router.post("/product/create/:userId", requireSignin, isAuth, isAdmin, create);
+router.post("/create/:userId", requireSignin, isAuth, isAdmin, create);
 
 router.param("userId", userById);
 
