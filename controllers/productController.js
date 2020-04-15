@@ -69,12 +69,14 @@ exports.update = (req, res) => {
   });
 };
 
-// Get list of products that can optionally be filtered by category and/or in-stock-only
-// and that will be sorted by descending popularity (default) or ascending price
+// Get a list of products
+// that can optionally be filtered by category and/or in-stock-only and/or search term
+// that will be sorted by descending popularity (default) or ascending price
 // Example routes:
 // /api/products/list -- no optional parameters used, response will include all products
 // /api/products/list?sort=popularity -- this returns the same response as the example above
 // /api/products/list?category=Board Games&available=true&sort=price
+// /api/products/list?search=Chess&available=true
 exports.list = (req, res) => {
   let selector = {};
   if (req.query.category) {
@@ -82,6 +84,9 @@ exports.list = (req, res) => {
   }
   if (req.query.available) {
     selector["quantity"] = { $gte: 1 };
+  }
+  if (req.query.search) {
+    selector["name"] = { $regex: req.query.search, $options: "i" };
   }
   if (req.query.sort === "price") {
     Product.find(selector)
@@ -108,7 +113,6 @@ exports.list = (req, res) => {
   }
 };
 
-// Get names of all product categories
 exports.listCategories = (req, res) => {
   Product.find({}).distinct("category", (err, categories) => {
     if (err) {
