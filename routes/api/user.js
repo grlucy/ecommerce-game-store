@@ -8,6 +8,8 @@ const {
 
 // Matches with "/api/user"
 
+router.get("/:userId", requireSignin, isAuth, userController.read);
+
 router.param("userId", userController.userById);
 
 module.exports = router;
