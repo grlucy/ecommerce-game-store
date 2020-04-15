@@ -69,11 +69,11 @@ exports.update = (req, res) => {
   });
 };
 
-// Get list of products that can be filtered by category and/or in-stock-only
+// Get list of products that can optionally be filtered by category and/or in-stock-only
 // and that will be sorted by descending popularity (default) or ascending price
 // Example routes:
-// /api/products/list
-// /api/products/list?sort=popularity
+// /api/products/list -- no optional parameters used, response will include all products
+// /api/products/list?sort=popularity -- this returns the same response as the example above
 // /api/products/list?category=Board Games&available=true&sort=price
 exports.list = (req, res) => {
   let selector = {};
@@ -106,4 +106,23 @@ exports.list = (req, res) => {
         res.json(products);
       });
   }
+};
+
+// Get names of all product categories
+exports.listCategories = (req, res) => {
+  Product.find({})
+    .select("category")
+    .sort({ category: 1 })
+    .exec((err, categories) => {
+      if (err) {
+        return res.status(400).json({
+          error: "No product categories found",
+        });
+      }
+      let categorySet = new Set();
+      categories.map((item) => {
+        categorySet.add(item.category);
+      });
+      res.json({ categories: Array.from(categorySet) });
+    });
 };
