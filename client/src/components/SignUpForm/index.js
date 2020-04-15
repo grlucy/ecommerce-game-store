@@ -39,6 +39,13 @@ function SignUpForm() {
               </div>
               <p className="help"></p>
             </div>
+            <div className="field">
+              <p className="control">
+                <button className="button is-danger">
+                  Submit
+                </button>
+              </p>
+            </div>
           </form>
         </div>
       </div>
