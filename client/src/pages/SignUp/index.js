@@ -4,9 +4,28 @@ import SignUpForm from "../../components/SignUpForm";
 
 function SignUp() {
 
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: "",
+    success: false
+  });
+
+  const handleInputChange = name => event => {
+    setValues({ ...values, error: false, [name]: event.target.value });
+  };
+
+  const handleFormSubmit = event => {
+    event.preventDefault();
+  };
+
   return (
     <>
-      <SignUpForm />
+      <SignUpForm onChange={handleInputChange} onSubmit={handleFormSubmit}/>
+      <div>
+        {/* {JSON.stringify(values)} */}
+      </div>
     </>
   );
 }
