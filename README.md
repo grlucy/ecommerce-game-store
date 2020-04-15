@@ -26,6 +26,7 @@ A website for a local game store that enables online transactions and curbside p
 | GitHub (Issues & Projects) | Adobe XD               |
 | Slack                      | Adobe Illustrator      |
 | Google Drive               | Adobe Photoshop        |
+| Zoom                       |                        |
 
 ## Credits
 
