@@ -110,19 +110,12 @@ exports.list = (req, res) => {
 
 // Get names of all product categories
 exports.listCategories = (req, res) => {
-  Product.find({})
-    .select("category")
-    .sort({ category: 1 })
-    .exec((err, categories) => {
-      if (err) {
-        return res.status(400).json({
-          error: "No product categories found",
-        });
-      }
-      let categorySet = new Set();
-      categories.map((item) => {
-        categorySet.add(item.category);
+  Product.find({}).distinct("category", (err, categories) => {
+    if (err) {
+      return res.status(400).json({
+        error: "No product categories found",
       });
-      res.json({ categories: Array.from(categorySet) });
-    });
+    }
+    res.json(categories);
+  });
 };
