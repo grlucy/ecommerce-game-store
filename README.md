@@ -8,25 +8,25 @@ A website for a local game store that enables online transactions and curbside p
 
 ## Technologies
 
-| Front End | Back End                                   | Testing | Deployment |
-| --------- | ------------------------------------------ | ------- | ---------- |
-| React     | JavaScript                                 | Postman | Git        |
-| Axios     | MongoDB                                    | Robo 3T | Heroku     |
-| HTML      | Mongoose                                   |         | mLab       |
-| CSS       | Express                                    |         |            |
-| Bulma     | Node.js                                    |         |            |
-|           | Password hashing with crypto, uuid         |         |            |
-|           | Express-validator                          |         |            |
-|           | User tokens with express-jwt, jsonwebtoken |         |            |
-|           | Cookie-parser                              |         |            |
-|           | Dotenv                                     |         |            |
+| Front End |                Back End                | Testing | Deployment |    Storage     |
+| :-------: | :------------------------------------: | :-----: | :--------: | :------------: |
+|   React   |               JavaScript               | Postman |    Git     | AWS S3 Buckets |
+|   Axios   |                MongoDB                 | Robo 3T |   Heroku   |                |
+|   HTML    |                Mongoose                |         |    mLab    |                |
+|    CSS    |                Express                 |         |            |                |
+|   Bulma   |                Node.js                 |         |            |                |
+|           |     Password hashing: crypto, uuid     |         |            |                |
+|           |           Express-validator            |         |            |                |
+|           | User tokens: express-jwt, jsonwebtoken |         |            |                |
+|           |             Cookie-parser              |         |            |                |
+|           |                 Dotenv                 |         |            |                |
 
-| Project Management         | Wireframing & Graphics |
-| -------------------------- | ---------------------- |
-| GitHub (Issues & Projects) | Adobe XD               |
-| Slack                      | Adobe Illustrator      |
-| Google Drive               | Adobe Photoshop        |
-| Zoom                       |                        |
+|     Project Management     | Wireframing & Graphics |
+| :------------------------: | :--------------------: |
+| GitHub (Issues & Projects) |        Adobe XD        |
+|           Slack            |   Adobe Illustrator    |
+|        Google Drive        |    Adobe Photoshop     |
+|            Zoom            |                        |
 
 ## Credits
 
