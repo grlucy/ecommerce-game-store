@@ -29,7 +29,6 @@ function SignUp() {
     })
       .then((data) => {
         if (data.error) {
-          console.log(data);
           setValues({ ...values, error: data.error, success: false });
         } else {
           setValues({
@@ -42,7 +41,6 @@ function SignUp() {
         }
       })
       .catch((err) => {
-        console.log(err.response);
         if (
           err.response.data.err ===
           "11000 duplicate key error collection: dragonsden.users index: email already exists; must be unique"
