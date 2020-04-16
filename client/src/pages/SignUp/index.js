@@ -27,9 +27,9 @@ function SignUp() {
       email: values.email,
       password: values.password,
     })
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, success: false });
+      .then((res) => {
+        if (res.error) {
+          setValues({ ...values, error: res.error, success: false });
         } else {
           setValues({
             name: "",
