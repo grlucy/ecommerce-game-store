@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
+import { authenticate } from "../../utils/auth";
 import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
@@ -9,8 +10,8 @@ import HelpText from "../../components/AuthForm/HelpText";
 function SignIn() {
 
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "bjf216@gmail.com",
+    password: "hotdog1",
     error: "",
     loading: false,
     redirectToReferrer: false
@@ -27,14 +28,16 @@ function SignIn() {
       email: values.email,
       password: values.password
     })
-    .then( data => {
-      if(data.error) {
-        setValues({ ...values, error: data.error, loading: false });
+    .then( res => {
+      if(res.error) {
+        setValues({ ...values, error: res.error, loading: false });
       } else {
-        setValues({
-          ...values,
-          redirectToReferrer: true
-        });
+        authenticate(res.data, () => {
+          setValues({
+            ...values,
+            redirectToReferrer: true
+          });  
+        })
       }
     })
     .catch( err => {
