@@ -8,25 +8,25 @@ A website for a local game store that enables online transactions and curbside p
 
 ## Technologies
 
-| Front End | Back End                                   | Testing | Deployment |
-| --------- | ------------------------------------------ | ------- | ---------- |
-| React     | JavaScript                                 | Postman | Git        |
-| Axios     | MongoDB                                    | Robo 3T | Heroku     |
-| HTML      | Mongoose                                   |         | mLab       |
-| CSS       | Express                                    |         |            |
-| Bulma     | Node.js                                    |         |            |
-|           | Password hashing with crypto, uuid         |         |            |
-|           | Express-validator                          |         |            |
-|           | User tokens with express-jwt, jsonwebtoken |         |            |
-|           | Cookie-parser                              |         |            |
-|           | Dotenv                                     |         |            |
+| Front End |                Back End                | Testing | Deployment |    Storage     |
+| :-------: | :------------------------------------: | :-----: | :--------: | :------------: |
+|   React   |               JavaScript               | Postman |    Git     | AWS S3 Buckets |
+|   Axios   |                MongoDB                 | Robo 3T |   Heroku   |                |
+|   HTML    |                Mongoose                |         |    mLab    |                |
+|    CSS    |                Express                 |         |            |                |
+|   Bulma   |                Node.js                 |         |            |                |
+|           |     Password hashing: crypto, uuid     |         |            |                |
+|           |           Express-validator            |         |            |                |
+|           | User tokens: express-jwt, jsonwebtoken |         |            |                |
+|           |             Cookie-parser              |         |            |                |
+|           |                 Dotenv                 |         |            |                |
 
-| Project Management         | Wireframing & Graphics |
-| -------------------------- | ---------------------- |
-| GitHub (Issues & Projects) | Adobe XD               |
-| Slack                      | Adobe Illustrator      |
-| Google Drive               | Adobe Photoshop        |
-| Zoom                       |                        |
+|     Project Management     | Wireframing & Graphics |
+| :------------------------: | :--------------------: |
+| GitHub (Issues & Projects) |        Adobe XD        |
+|           Slack            |   Adobe Illustrator    |
+|        Google Drive        |    Adobe Photoshop     |
+|            Zoom            |                        |
 
 ## Credits
 
@@ -43,6 +43,11 @@ Stock images:
 - 'dominos.jpg' by [Jonathan Campos from Pexels](https://www.pexels.com/photo/close-up-photo-of-dominoes-4066131/)
 - 'pawns.jpg' by [Pixabay from Pexels](https://www.pexels.com/photo/focus-photo-of-4-wooden-pawn-figurine-209728/)
 - 'mahjong.jpg' by [Ellicia on Unsplash](https://unsplash.com/photos/rMm0dChKUaI)
+- 'tarot.jpg' from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Sola-Busca_tarot_deck)
+- 'puppypuzzle.jpg' photo by [Jairo Alzate on Unsplash](https://unsplash.com/photos/sssxyuZape8)
+- 'flowerpuzzle.jpg' photo by [Yoksel Zok on Unsplash](https://unsplash.com/photos/QathkdBonnY)
+- 'skylinepuzzle.jpg' photo by [Luca Bravo on Unsplash](https://unsplash.com/photos/_QdFx92MO2U)
+- 'checkers.jpg' by [Trent Jackson on Unsplash](https://unsplash.com/photos/KeLlkIwg038)
 
 Tutorials:
 
