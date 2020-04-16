@@ -15,7 +15,7 @@ function NavMenu(props) {
           Contact  
         </Link>
         <Link to="/cart" className={location.pathname === "/cart" ? "navbar-item is-active" : "navbar-item"}>
-          <i class="fas fa-shopping-cart"></i>
+          <i className="fas fa-shopping-cart"></i>
         </Link>
         <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
           <button className="button is-danger is-small">Sign In</button>

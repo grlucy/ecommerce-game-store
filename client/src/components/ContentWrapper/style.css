@@ -1,0 +1,4 @@
+/* This is for positioning of sticky footer */
+.content-wrapper {
+  min-height: calc(100vh - 42px);
+}

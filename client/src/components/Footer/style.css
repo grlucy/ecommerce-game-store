@@ -1,0 +1,13 @@
+footer {
+  /* footer height must match offset in ContentWrapper css */
+  height: 42px;
+  background-color: black;
+}
+
+.bd-tw-button {
+  line-height: 24px;
+  font-size: 24px;
+  height: 30px;
+  width: 30px;
+  padding: 0px;
+}
