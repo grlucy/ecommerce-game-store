@@ -7,43 +7,59 @@ import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
 
 function SignUp() {
-
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
     error: "",
-    success: false
+    success: false,
   });
 
-  const handleInputChange = name => event => {
+  const handleInputChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const handleFormSubmit = event => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false });
     API.signUp({
       name: values.name,
       email: values.email,
-      password: values.password
+      password: values.password,
     })
-    .then( data => {
-      if(data.error) {
-        setValues({ ...values, error: data.error, success: false });
-      } else {
-        setValues({
-          name: "",
-          email: "",
-          password: "",
-          error: "",
-          success: true
-        });
-      }
-    })
-    .catch( err => {
-      setValues({ ...values, error: err.message, success: false });
-    });
+      .then((data) => {
+        if (data.error) {
+          console.log(data);
+          setValues({ ...values, error: data.error, success: false });
+        } else {
+          setValues({
+            name: "",
+            email: "",
+            password: "",
+            error: "",
+            success: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+        if (
+          err.response.data.err ===
+          "11000 duplicate key error collection: dragonsden.users index: email already exists; must be unique"
+        ) {
+          setValues({
+            ...values,
+            error: "This email address already has an account",
+            success: false,
+          });
+        } else {
+          setValues({
+            ...values,
+            error: err.response.data.error,
+            success: false,
+          });
+        }
+      });
   };
 
   return (
@@ -76,9 +92,7 @@ function SignUp() {
           value={values.password}
           icon="fas fa-lock"
         />
-        <SubmitBtn 
-          onSubmit={handleFormSubmit}
-        />
+        <SubmitBtn onSubmit={handleFormSubmit} />
         <HelpText toggle={values.error} color="is-danger">
           {values.error}
         </HelpText>
