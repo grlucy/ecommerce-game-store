@@ -19,7 +19,6 @@ function InputField(props) {
           <i className={icon}></i>
         </span>
       </div>
-      <p className="help">{help}</p>
     </div>
   );
 }

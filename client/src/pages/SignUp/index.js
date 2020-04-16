@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
+import HelpText from "../../components/AuthForm/HelpText";
 
 function SignUp() {
 
@@ -20,6 +21,7 @@ function SignUp() {
 
   const handleFormSubmit = event => {
     event.preventDefault();
+    setValues({ ...values, error: false });
     API.signUp({
       name: values.name,
       email: values.email,
@@ -54,7 +56,6 @@ function SignUp() {
           onChange={handleInputChange}
           value={values.email}
           icon="fas fa-envelope"
-          help=""
         />
         <InputField
           name="name"
@@ -64,7 +65,6 @@ function SignUp() {
           onChange={handleInputChange}
           value={values.name}
           icon="fas fa-user"
-          help=""
         />
         <InputField
           name="password"
@@ -74,15 +74,12 @@ function SignUp() {
           onChange={handleInputChange}
           value={values.password}
           icon="fas fa-lock"
-          help=""
         />
         <SubmitBtn 
           onSubmit={handleFormSubmit}
         />
+        <HelpText error={values.error} success={values.success} />
       </AuthForm>
-      <div>
-        {JSON.stringify(values)}
-      </div>
     </>
   );
 }
