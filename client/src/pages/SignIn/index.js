@@ -7,46 +7,49 @@ import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
 
 function SignIn() {
-
   const [values, setValues] = useState({
     email: "",
     password: "",
     error: "",
     loading: false,
-    redirectToReferrer: false
+    redirectToReferrer: false,
   });
 
-  const handleInputChange = name => event => {
+  const handleInputChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const handleFormSubmit = event => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     API.signIn({
       email: values.email,
-      password: values.password
+      password: values.password,
     })
-    .then( data => {
-      if(data.error) {
-        setValues({ ...values, error: data.error, loading: false });
-      } else {
+      .then((data) => {
+        if (data.error) {
+          setValues({ ...values, error: data.error, loading: false });
+        } else {
+          setValues({
+            ...values,
+            redirectToReferrer: true,
+          });
+        }
+      })
+      .catch((err) => {
         setValues({
           ...values,
-          redirectToReferrer: true
+          error: err.response.data.error,
+          success: false,
         });
-      }
-    })
-    .catch( err => {
-      setValues({ ...values, error: err.message, success: false });
-    });
+      });
   };
 
   const redirectUser = () => {
-    if(values.redirectToReferrer) {
-      return <Redirect to="/" />
+    if (values.redirectToReferrer) {
+      return <Redirect to="/" />;
     }
-  }
+  };
 
   return (
     <>
@@ -69,9 +72,7 @@ function SignIn() {
           value={values.password}
           icon="fas fa-lock"
         />
-        <SubmitBtn 
-          onSubmit={handleFormSubmit}
-        />
+        <SubmitBtn onSubmit={handleFormSubmit} />
         <HelpText toggle={values.error} color="is-danger">
           {values.error}
         </HelpText>
