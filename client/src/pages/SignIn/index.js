@@ -8,48 +8,51 @@ import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
 
 function SignIn() {
-
   const [values, setValues] = useState({
     email: "bjf216@gmail.com",
     password: "hotdog1",
     error: "",
     loading: false,
-    redirectToReferrer: false
+    redirectToReferrer: false,
   });
 
-  const handleInputChange = name => event => {
+  const handleInputChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const handleFormSubmit = event => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     API.signIn({
       email: values.email,
-      password: values.password
+      password: values.password,
     })
-    .then( res => {
-      if(res.error) {
+    .then((res) => {
+      if (res.error) {
         setValues({ ...values, error: res.error, loading: false });
       } else {
         authenticate(res.data, () => {
           setValues({
             ...values,
-            redirectToReferrer: true
+            redirectToReferrer: true,
           });  
-        })
+        });
       }
     })
-    .catch( err => {
-      setValues({ ...values, error: err.message, success: false });
+    .catch((err) => {
+      setValues({
+        ...values,
+        error: err.response.data.error,
+        success: false
+      });
     });
   };
 
   const redirectUser = () => {
-    if(values.redirectToReferrer) {
-      return <Redirect to="/" />
+    if (values.redirectToReferrer) {
+      return <Redirect to="/" />;
     }
-  }
+  };
 
   return (
     <>
@@ -72,9 +75,7 @@ function SignIn() {
           value={values.password}
           icon="fas fa-lock"
         />
-        <SubmitBtn 
-          onSubmit={handleFormSubmit}
-        />
+        <SubmitBtn onSubmit={handleFormSubmit} />
         <HelpText toggle={values.error} color="is-danger">
           {values.error}
         </HelpText>
