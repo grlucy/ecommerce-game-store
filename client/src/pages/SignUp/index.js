@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
@@ -78,7 +79,12 @@ function SignUp() {
         <SubmitBtn 
           onSubmit={handleFormSubmit}
         />
-        <HelpText error={values.error} success={values.success} />
+        <HelpText toggle={values.error} color="is-danger">
+          {values.error}
+        </HelpText>
+        <HelpText toggle={values.success} color="is-success">
+          New account created. Please <Link to="/signin">Sign In</Link>.
+        </HelpText>
       </AuthForm>
     </>
   );
