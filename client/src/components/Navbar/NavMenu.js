@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { signout } from "../../utils/auth";
+import { signout, isAuthenticated } from "../../utils/auth";
 
 function NavMenu(props) {
 
@@ -19,22 +19,24 @@ function NavMenu(props) {
         <Link to="/cart" className={location.pathname === "/cart" ? "navbar-item is-active" : "navbar-item"}>
           <i className="fas fa-shopping-cart"></i>
         </Link>
-        <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
-          <button className="button is-danger is-small">Sign In</button>
-        </Link>
-        <div className="navbar-item">
-          <button
-            className="button is-danger is-small"
-            // style={{ cursor: "pointer" }}
-            onClick={() =>
-              signout(() => {
-                history.push("/");
-              })
-          }>
-            Sign Out
-          </button>
-        </div>
-
+        {!isAuthenticated() && (
+          <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
+            <button className="button is-danger is-small">Sign In</button>
+          </Link>
+        )}
+        {isAuthenticated() && (
+          <div className="navbar-item">
+            <button
+              className="button is-danger is-small"
+              onClick={() =>
+                signout(() => {
+                  history.push("/");
+                })
+              }>
+              Sign Out
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

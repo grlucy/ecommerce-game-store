@@ -5,6 +5,7 @@ import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
+import LinkBtn from "../../components/LinkBtn";
 
 function SignUp() {
   const [values, setValues] = useState({
@@ -62,7 +63,7 @@ function SignUp() {
 
   return (
     <>
-      <AuthForm title="Sign Up">
+      <AuthForm title="SIGN UP">
         <InputField
           name="email"
           label="Email Address:"
@@ -97,6 +98,8 @@ function SignUp() {
         <HelpText toggle={values.success} color="is-success">
           New account created. Please <Link to="/signin">Sign In</Link>.
         </HelpText>
+        <hr />
+        <LinkBtn route="/signin">USE EXISTING ACCOUNT</LinkBtn>
       </AuthForm>
     </>
   );

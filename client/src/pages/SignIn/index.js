@@ -6,6 +6,7 @@ import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
+import LinkBtn from "../../components/LinkBtn";
 
 function SignIn() {
   const [values, setValues] = useState({
@@ -56,7 +57,7 @@ function SignIn() {
 
   return (
     <>
-      <AuthForm title="Sign In">
+      <AuthForm title="SIGN IN">
         <InputField
           name="email"
           label="Email Address:"
@@ -82,6 +83,8 @@ function SignIn() {
         <HelpText toggle={values.loading} color="is-info">
           Loading...
         </HelpText>
+        <hr />
+        <LinkBtn route="/signup">CREATE AN ACCOUNT</LinkBtn>
       </AuthForm>
       {redirectUser()}
     </>
