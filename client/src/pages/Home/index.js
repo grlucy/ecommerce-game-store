@@ -3,6 +3,7 @@ import API from "../../utils/API";
 
 import FeaturedCategory from "../../components/FeaturedCategory";
 import SecondaryCategory from "../../components/SecondaryCategory";
+import News from "../../components/News";
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
           classes="LHeight secondary-box-right"
         />
       </div>
+      <News />
     </>
   );
 }

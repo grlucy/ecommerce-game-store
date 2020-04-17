@@ -43,3 +43,8 @@
     margin-bottom: 0.2rem;
   }
 }
+.news-img {
+  width: 250px;
+  margin-right: 4rem;
+  flex-shrink: 0;
+}
