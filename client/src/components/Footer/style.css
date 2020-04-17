@@ -6,10 +6,14 @@ footer {
   height: 42px;
 }
 
-.bd-tw-button {
+.social-link {
   line-height: 24px;
   font-size: 24px;
-  height: 30px;
-  width: 30px;
-  padding: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+  footer {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }

@@ -6,7 +6,7 @@ import "./style.css";
 function Footer() {
   return (
     <footer>
-      <div className="container level footer-level">
+      <div className="container level is-mobile footer-level">
         <FooterLogo />
         <SocialLinks />
       </div>

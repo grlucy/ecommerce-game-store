@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
@@ -15,22 +15,24 @@ import Footer from "./components/Footer";
 class App extends Component {
   render() {
     return (
-      <Router>
-        <ContentWrapper>
-          <Header />
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/store" component={Store} />
-          </Switch>
-        </ContentWrapper>
-        <Footer />
-      </Router>
+      <>
+        <Router>
+          <ContentWrapper>
+            <Header />
+            <Switch>
+              <Route exact path={["/", "/home"]} component={Home} />
+              <Route exact path="/account" component={Account} />
+              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/store" component={Store} />
+            </Switch>
+          </ContentWrapper>
+          <Footer />
+        </Router>
+      </>
     );
   }
 }
