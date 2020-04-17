@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { signout } from "../../utils/auth";
 
 function NavMenu(props) {
 
   const location = props.location;
+  const history = useHistory();
 
   return (
     <div className="navbar-menu">
@@ -20,6 +22,18 @@ function NavMenu(props) {
         <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
           <button className="button is-danger is-small">Sign In</button>
         </Link>
+        <div
+          className="navbar-item"
+          style={{ cursor: "pointer" }}
+          onClick={() =>
+            signout(() => {
+              history.push("/");
+            })
+          }
+        >
+          Sign Out
+        </div>
+
       </div>
     </div>
   );
