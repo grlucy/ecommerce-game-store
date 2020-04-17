@@ -22,16 +22,17 @@ function NavMenu(props) {
         <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
           <button className="button is-danger is-small">Sign In</button>
         </Link>
-        <div
-          className="navbar-item"
-          style={{ cursor: "pointer" }}
-          onClick={() =>
-            signout(() => {
-              history.push("/");
-            })
-          }
-        >
-          Sign Out
+        <div className="navbar-item">
+          <button
+            className="button is-danger is-small"
+            // style={{ cursor: "pointer" }}
+            onClick={() =>
+              signout(() => {
+                history.push("/");
+              })
+          }>
+            Sign Out
+          </button>
         </div>
 
       </div>
