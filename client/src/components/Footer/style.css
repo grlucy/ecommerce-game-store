@@ -1,7 +1,9 @@
 footer {
   /* footer height must match offset in ContentWrapper css */
-  height: 42px;
   background-color: black;
+}
+.footer-level {
+  height: 42px;
 }
 
 .bd-tw-button {
