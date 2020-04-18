@@ -11,6 +11,7 @@ import Store from "./pages/Store";
 import ContentWrapper from "./components/ContentWrapper";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PrivateRoute from "./utils/PrivateRoute";
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/store" component={Store} />
+            <PrivateRoute path="/account" exact component={Account} />
           </Switch>
         </ContentWrapper>
         <Footer />
