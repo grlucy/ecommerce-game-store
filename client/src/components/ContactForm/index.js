@@ -9,7 +9,9 @@ function ContactForm() {
         action="https://formspree.io/mwkndlvn"
         method="POST"
       >
-        <h4 className="title is-4 has-text-black">CONTACT US</h4>
+        <h4 className="title is-4 has-text-black has-text-centered-mobile">
+          Contact Us:
+        </h4>
         <div className="field">
           <label className="label">Name:</label>
           <div className="control">
@@ -40,6 +42,7 @@ function ContactForm() {
               class="textarea is-radiusless"
               name="message"
               placeholder="Message"
+              rows="2"
             />
           </div>
         </div>

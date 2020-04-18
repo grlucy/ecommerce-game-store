@@ -7,8 +7,8 @@ import ContactForm from "../ContactForm";
 function ContactSection() {
   return (
     <>
-      <div className="columns">
-        <div className="column is-one-quarter is-hidden-mobile">
+      <div className="columns is-variable is-6">
+        <div className="column is-one-third is-hidden-mobile">
           <FeatureImage />
         </div>
         <div className="column">

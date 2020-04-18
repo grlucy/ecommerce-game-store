@@ -8,13 +8,13 @@ function ContactInfo() {
   return (
     <>
       <div className="columns">
-        <div className="column">
+        <div className="column has-text-centered-mobile">
           <Address />
         </div>
-        <div className="column">
+        <div className="column has-text-centered-mobile">
           <Phone />
         </div>
-        <div className="column">
+        <div className="column has-text-centered-mobile">
           <Hours />
         </div>
       </div>
