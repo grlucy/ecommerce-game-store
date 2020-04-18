@@ -1,13 +1,19 @@
 footer {
   /* footer height must match offset in ContentWrapper css */
-  height: 42px;
   background-color: black;
 }
+.footer-level {
+  height: 42px;
+}
 
-.bd-tw-button {
+.social-link {
   line-height: 24px;
   font-size: 24px;
-  height: 30px;
-  width: 30px;
-  padding: 0px;
+}
+
+@media only screen and (max-width: 1023px) {
+  footer {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }

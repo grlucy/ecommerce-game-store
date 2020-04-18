@@ -4,11 +4,12 @@ import SocialLinks from "./SocialLinks";
 import "./style.css";
 
 function Footer() {
-
   return (
-    <footer className="level">
-      <FooterLogo />
-      <SocialLinks />
+    <footer>
+      <div className="container level is-mobile footer-level">
+        <FooterLogo />
+        <SocialLinks />
+      </div>
     </footer>
   );
 }
