@@ -8,7 +8,7 @@ function ContactSection() {
   return (
     <>
       <div className="columns">
-        <div className="column is-one-quarter">
+        <div className="column is-one-quarter is-hidden-mobile">
           <FeatureImage />
         </div>
         <div className="column">
