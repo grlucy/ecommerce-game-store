@@ -21,14 +21,13 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/admin" component={Admin} />
+            <PrivateRoute exact path="/admin" component={Admin} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/store" component={Store} />
-            <PrivateRoute path="/account" exact component={Account} />
+            <PrivateRoute exact path="/account" component={Account} />
           </Switch>
         </ContentWrapper>
         <Footer />
