@@ -52,14 +52,14 @@ function SignIn() {
   };
 
   const redirectUser = () => {
-    if (values.redirectToReferrer) {
+    if (values.redirectToReferrer) {  //redirect user appropriately after login
       if (user && user.role === "Admin") {
         return <Redirect to="/admin" />
       } else {
         return <Redirect to="/account" />
       }
     }
-    if (isAuthenticated()) {
+    if (isAuthenticated()) {  //this catches authenticated non-admin users redirected here from /admin route
       return <Redirect to="/" />
     }
   };
