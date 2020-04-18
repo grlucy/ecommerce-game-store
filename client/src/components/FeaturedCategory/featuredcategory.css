@@ -7,7 +7,9 @@
 .align-bot {
   vertical-align: bottom;
 }
-.featured-container {
+.featured-container,
+.secondary-box-left,
+.secondary-box-right {
   position: relative;
 }
 .featured-overlay {
@@ -22,6 +24,16 @@
 }
 .line-space {
   line-height: 1.7;
+}
+.secondary-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background-image: linear-gradient(black 30%, transparent);
+}
+.secondary-header {
+  font-size: calc(0.8rem + 2vw);
 }
 .featured-img {
   height: 70vh;

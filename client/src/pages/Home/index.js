@@ -13,10 +13,14 @@ function Home() {
         <SecondaryCategory
           image="assets/images/stock-photos/puzzle.jpg"
           classes="LHeight secondary-box-left"
+          headerText="PUZZLES FOR ALL AGES"
+          linkText="Shop Puzzles ➤"
         />
         <SecondaryCategory
           image="assets/images/stock-photos/cards.jpg"
           classes="LHeight secondary-box-right"
+          headerText="BUILD YOUR DECK"
+          linkText="Shop Cards ➤"
         />
       </div>
       <News />
