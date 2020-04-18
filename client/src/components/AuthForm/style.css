@@ -1,3 +1,10 @@
 .auth-form {
   margin-top: 10vh;
 }
+
+form {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dbdbdb;
+  padding: 36px; 
+}

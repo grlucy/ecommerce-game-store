@@ -6,7 +6,7 @@ function SubmitBtn(props) {
     <div className="field">
       <p className="control">
         <button className="button is-danger" onClick={props.onSubmit}>
-          Submit
+          SUBMIT
         </button>
       </p>
     </div>

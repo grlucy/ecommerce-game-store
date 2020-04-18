@@ -4,8 +4,9 @@ import API from "../../utils/API";
 function Account() {
 
   return (
-    <>
-    </>
+    <div>
+      Account Page
+    </div>
   );
 }
 

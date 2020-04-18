@@ -9,7 +9,7 @@ function InputField(props) {
       <label className="label">{label}</label>
       <div className="control has-icons-left">
         <input 
-          className="input"
+          className="input is-radiusless"
           type={type}
           placeholder={placeholder}
           onChange={onChange(name)}

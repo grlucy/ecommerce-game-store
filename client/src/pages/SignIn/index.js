@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
+import { authenticate } from "../../utils/auth";
 import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
 import HelpText from "../../components/AuthForm/HelpText";
+import LinkBtn from "../../components/LinkBtn";
 
 function SignIn() {
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "bjf216@gmail.com",
+    password: "hotdog1",
     error: "",
     loading: false,
     redirectToReferrer: false,
@@ -26,23 +28,25 @@ function SignIn() {
       email: values.email,
       password: values.password,
     })
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
-        } else {
+    .then((res) => {
+      if (res.error) {
+        setValues({ ...values, error: res.error, loading: false });
+      } else {
+        authenticate(res.data, () => {
           setValues({
             ...values,
             redirectToReferrer: true,
-          });
-        }
-      })
-      .catch((err) => {
-        setValues({
-          ...values,
-          error: err.response.data.error,
-          success: false,
+          });  
         });
+      }
+    })
+    .catch((err) => {
+      setValues({
+        ...values,
+        error: err.response.data.error,
+        success: false
       });
+    });
   };
 
   const redirectUser = () => {
@@ -53,7 +57,7 @@ function SignIn() {
 
   return (
     <>
-      <AuthForm title="Sign In">
+      <AuthForm title="SIGN IN">
         <InputField
           name="email"
           label="Email Address:"
@@ -79,6 +83,8 @@ function SignIn() {
         <HelpText toggle={values.loading} color="is-info">
           Loading...
         </HelpText>
+        <hr />
+        <LinkBtn route="/signup">CREATE AN ACCOUNT</LinkBtn>
       </AuthForm>
       {redirectUser()}
     </>
