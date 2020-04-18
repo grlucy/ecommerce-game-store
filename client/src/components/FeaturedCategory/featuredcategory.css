@@ -17,6 +17,12 @@
   height: 60%;
   background-image: linear-gradient(to top, black 30%, transparent);
 }
+.featured-header {
+  font-size: calc(0.8rem + 3vw);
+}
+.line-space {
+  line-height: 1.7;
+}
 .featured-img {
   height: 70vh;
   width: 100%;
