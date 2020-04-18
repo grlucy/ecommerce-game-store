@@ -16,7 +16,7 @@ A website for a local game store that enables online transactions and curbside p
 |     CSS      |                Express                 |         |            |                |
 |    Bulma     |                Node.js                 |         |            |                |
 |     HTML     |     Password hashing: crypto, uuid     |         |            |                |
-|              |           Express-validator            |         |            |                |
+|  Formspree   |           Express-validator            |         |            |                |
 |              | User tokens: express-jwt, jsonwebtoken |         |            |                |
 |              |             Cookie-parser              |         |            |                |
 |              |                 Dotenv                 |         |            |                |
