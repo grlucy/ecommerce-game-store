@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
-import { authenticate } from "../../utils/auth";
+import { authenticate, isAuthenticated } from "../../utils/auth";
 import AuthForm from "../../components/AuthForm";
 import InputField from "../../components/AuthForm/InputField";
 import SubmitBtn from "../../components/AuthForm/SubmitBtn";
@@ -16,6 +16,8 @@ function SignIn() {
     loading: false,
     redirectToReferrer: false,
   });
+
+  const { user } = isAuthenticated();
 
   const handleInputChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -51,7 +53,14 @@ function SignIn() {
 
   const redirectUser = () => {
     if (values.redirectToReferrer) {
-      return <Redirect to="/" />;
+      if (user && user.role === "Admin") {
+        return <Redirect to="/admin" />
+      } else {
+        return <Redirect to="/account" />
+      }
+    }
+    if (isAuthenticated()) {
+      return <Redirect to="/" />
     }
   };
 
