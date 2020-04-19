@@ -2,12 +2,12 @@ import React from "react";
 
 function InputField(props) {
 
-  const { name, label, type, placeholder, onChange, value, icon, help } = props;
+  const { name, label, type, placeholder, onChange, value } = props;
 
   return (
     <div className="field">
       <label className="label">{label}</label>
-      <div className="control has-icons-left">
+      <div className="control">
         <input 
           className="input is-radiusless"
           type={type}
@@ -15,9 +15,6 @@ function InputField(props) {
           onChange={onChange(name)}
           value={value}
         />
-        <span className="icon is-small is-left">
-          <i className={icon}></i>
-        </span>
       </div>
     </div>
   );

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import AuthForm from "../../components/AuthForm";
-import InputField from "../../components/AuthForm/InputField";
-import SubmitBtn from "../../components/AuthForm/SubmitBtn";
-import HelpText from "../../components/AuthForm/HelpText";
+import AuthInputField from "../../components/AuthForm/AuthInputField";
+import SubmitBtn from "../../components/Form/SubmitBtn";
+import HelpText from "../../components/Form/HelpText";
 import LinkBtn from "../../components/LinkBtn";
 
 function SignUp() {
@@ -64,7 +64,7 @@ function SignUp() {
   return (
     <>
       <AuthForm title="SIGN UP">
-        <InputField
+        <AuthInputField
           name="email"
           label="Email Address:"
           type="email"
@@ -73,7 +73,7 @@ function SignUp() {
           value={values.email}
           icon="fas fa-envelope"
         />
-        <InputField
+        <AuthInputField
           name="name"
           label="Name:"
           type="text"
@@ -82,7 +82,7 @@ function SignUp() {
           value={values.name}
           icon="fas fa-user"
         />
-        <InputField
+        <AuthInputField
           name="password"
           label="Password:"
           type="password"
