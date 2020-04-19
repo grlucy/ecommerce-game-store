@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
+import adminAPI from "../../utils/adminAPI";
 import { isAuthenticated } from "../../utils/auth";
 import "./style.css";
 import { TransactionLineItem } from "braintree";
@@ -16,7 +17,9 @@ function Admin() {
     category: "",
     quantity: "",
     image: "",
-    description: ""
+    description: "",
+    error: "",
+    success: ""
   });
 
   const [ existingProductVals, setExistingProductVals ] = useState({
@@ -25,10 +28,12 @@ function Admin() {
     category: "",
     quantity: "",
     image: "",
-    description: ""
+    description: "",
+    error: "",
+    success: ""
   });
 
-  
+  const { user, token } = isAuthenticated();
   
   const handleNewProdChange = (name) => (event) => {
     setNewProductVals({ ...newProductVals, error: false, [name]: event.target.value });
@@ -36,7 +41,40 @@ function Admin() {
 
   const handleNewProdSubmit = (event) => {
     event.preventDefault();
+    setNewProductVals({ ...newProductVals, error: false, success: false});
+    const { name, price, category, quantity, image, description } = newProductVals;
     console.log("new product form submitted");
+    adminAPI.createProduct(user._id, token, {
+      name,
+      price,
+      category,
+      quantity,
+      image,
+      description
+    })
+      .then((res) => {
+        if (res.error) {
+          setNewProductVals({ ...newProductVals, error: res.error, success: false });
+        } else {
+          setNewProductVals({
+            name: "",
+            price: "",
+            category: "",
+            quantity: "",
+            image: "",
+            description: "",
+            error: "",
+            success: true,
+          });
+        }
+      })
+      .catch((err) => {
+        setNewProductVals({
+          ...newProductVals,
+          error: err.response.data.error,
+          success: false,
+        });
+      });      
   };
 
   const handleExistingProdChange = (name) => (event) => {
