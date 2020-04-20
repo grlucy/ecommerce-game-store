@@ -11,3 +11,7 @@ body {
 #nav-toggle-state:checked ~ .navbar-menu {
   display: block;
 }
+
+.submit-btn {
+  margin: auto;
+}
