@@ -1,25 +1,37 @@
 # Ecommerce Game Store
 
-Deployed at XX
+Deployed at https://dragons-den-store.herokuapp.com/
 
 ## Description
 
-A website for a local game store that enables online transactions and curbside pickup scheduling
+A website for a local game store that enables online transactions and curbside pickup scheduling. The Braintree payment system accepts credit card and PayPal payments. Along with a home page and contact page, the site includes:
+
+- a store with products that can be searched, sorted, and filtered
+- a cart that stores user-selected products until they are ready to make a transaction
+- signup and signin pages with secure user authentication
+- a customer dashboard with order history
+- an admin dashboard with a built-in inventory management system
+
+## User Story
+
+**_AS A_** tabletop gaming enthusiast who is practicing social distancing<br />
+**_I WANT_** to buy games online and schedule a curbside pickup<br />
+**_SO THAT_** I can have fun while quarantined without putting my health at risk
 
 ## Technologies
 
-|  Front End   |                Back End                | Testing | Deployment |    Storage     |
-| :----------: | :------------------------------------: | :-----: | :--------: | :------------: |
-|    React     |               JavaScript               | Postman |    Git     | AWS S3 Buckets |
-|    Axios     |                MongoDB                 | Robo 3T |   Heroku   |                |
-| React Router |                Mongoose                |         |    mLab    |                |
-|     CSS      |                Express                 |         |            |                |
-|    Bulma     |                Node.js                 |         |            |                |
-|     HTML     |     Password hashing: crypto, uuid     |         |            |                |
-|  Formspree   |           Express-validator            |         |            |                |
-|              | User tokens: express-jwt, jsonwebtoken |         |            |                |
-|              |             Cookie-parser              |         |            |                |
-|              |                 Dotenv                 |         |            |                |
+|   Front End   |                Back End                |      Testing      | Deployment |    Storage     |
+| :-----------: | :------------------------------------: | :---------------: | :--------: | :------------: |
+|     React     |               JavaScript               |      Postman      |    Git     | AWS S3 Buckets |
+|     Axios     |                MongoDB                 |      Robo 3T      |   Heroku   |                |
+| React Router  |                Mongoose                | Braintree Sandbox |    mLab    |                |
+|      CSS      |                Express                 |                   |            |                |
+|     Bulma     |                Node.js                 |                   |            |                |
+|     HTML      |     Password hashing: crypto, uuid     |                   |            |                |
+| Formspree API |           Express-validator            |                   |            |                |
+|               | User tokens: express-jwt, jsonwebtoken |                   |            |                |
+|               |             Cookie-parser              |                   |            |                |
+|               |                 Dotenv                 |                   |            |                |
 
 |     Project Management     | Wireframing & Graphics |
 | :------------------------: | :--------------------: |
@@ -27,6 +39,14 @@ A website for a local game store that enables online transactions and curbside p
 |           Slack            |   Adobe Illustrator    |
 |        Google Drive        |    Adobe Photoshop     |
 |            Zoom            |                        |
+
+## Future Development Options
+
+- Events calendar with online classes and tournaments available for purchase
+- Video storage for purchased online classes and tournaments
+- Push notification reminders for curbside pickup scheduling
+- Shipping option in addition to curbside pickup
+- Blog page
 
 ## Credits
 
@@ -52,3 +72,13 @@ Stock images:
 Tutorials:
 
 - "MERN Stack React Node Ecommerce" by [Ryan Dhungel on Udemy](https://www.udemy.com/course/react-node-ecommerce/)
+
+## License
+
+© 2020 Gina Lucy & Ben Ferriman
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
