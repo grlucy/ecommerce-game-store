@@ -53,8 +53,6 @@ function Admin() {
   };
 
   const loadOpenOrders = () => {
-    console.log("user:", user);
-    console.log("token:", token);
     adminAPI.listOrders(user._id, token).then((res) => {
       if (res.error) {
         console.log(res.error);
