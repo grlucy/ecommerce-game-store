@@ -26,7 +26,7 @@ function OrdersTable(props) {
               <td>{order.user.email}</td>
               <td>
                 {order.products.map((product) => (
-                  <p>
+                  <p key={product.name}>
                     {product.name} ({product.count})
                   </p>
                 ))}
@@ -35,6 +35,13 @@ function OrdersTable(props) {
               <td></td>
             </tr>
           ))}
+          {props.orders.length < 1 ? (
+            <tr>
+              <td colSpan="6">
+                <em>There are currently no unfilled orders</em>
+              </td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
     </>
