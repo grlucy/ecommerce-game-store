@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import adminAPI from "../../utils/adminAPI";
 import StoreNav from "../../components/StoreNav";
+import StoreItem from "../../components/StoreItem";
 
 function Store() {
 
@@ -90,39 +91,13 @@ function Store() {
               onStockedChange={handleStockFilterChange}
               stockedChecked={stockedChecked}
             />
-            {/* <Form>
-              <SearchBar
-                placeholder="Search Products"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                onSubmit={handleSearchSubmit}
-              />
-              <hr></hr>
-              <label className="label">
-                Filter By Category:
-              </label>
-              {categories.map((category) => {
-                return (
-                  <CheckBox 
-                    name={category.name}
-                    label={category.name}
-                    onChange={handleCatFiltersChange}
-                    isSelected={category.isChecked}
-                    key={category.id}
-                  />
-                );
-              })}
-              <hr></hr>
-              <CheckBox
-                name="stocked"
-                label="In Stock Only"
-                onChange={handleStockFilterChange}
-                isSelected={stockedChecked}
-              />
-            </Form> */}
           </div>
           <div className="column is-three-quarters">
-            Second column
+            {products.map((product) => {
+              return (
+                <StoreItem product={product} key={product._id} />
+              );
+            })}
           </div>
         </div>
       </section>
