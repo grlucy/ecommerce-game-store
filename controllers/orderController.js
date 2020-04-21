@@ -14,8 +14,9 @@ exports.create = (req, res) => {
   });
 };
 
+// ADMIN ONLY --- Returns all unfilled orders
 exports.listOrders = (req, res) => {
-  Order.find()
+  Order.find({ status: "Unfilled" })
     .populate("user", "_id name email")
     .sort("-created")
     .exec((err, orders) => {
