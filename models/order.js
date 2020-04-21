@@ -16,6 +16,7 @@ const OrderSchema = new mongoose.Schema(
     products: [CartItemSchema],
     transaction_id: {},
     amount: { type: Number },
+    pickup: String,
     status: {
       type: String,
       default: "Unfilled",
