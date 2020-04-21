@@ -1,3 +1,6 @@
 .orders-table {
   margin: auto;
 }
+.tile-overflow {
+  overflow-x: auto;
+}

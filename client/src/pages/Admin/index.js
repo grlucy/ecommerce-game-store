@@ -517,7 +517,7 @@ function Admin() {
               </div>
             </div>
             <div className="tile is-parent">
-              <div className="tile is-child">
+              <div className="tile is-child tile-overflow">
                 <OrdersTable title="UNFILLED ORDERS" />
               </div>
             </div>
