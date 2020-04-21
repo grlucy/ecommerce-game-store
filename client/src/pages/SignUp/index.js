@@ -92,10 +92,10 @@ function SignUp() {
           icon="fas fa-lock"
         />
         <SubmitBtn onSubmit={handleFormSubmit} />
-        <HelpText toggle={values.error} color="is-danger">
+        <HelpText toggle={values.error} textSize="5" color="is-danger">
           {values.error}
         </HelpText>
-        <HelpText toggle={values.success} color="is-success">
+        <HelpText toggle={values.success} textSize="5" color="is-success">
           New account created. Please <Link to="/signin">Sign In</Link>.
         </HelpText>
         <hr />

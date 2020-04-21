@@ -18,7 +18,8 @@ function Dropdown(props) {
                 onChange={onChange(name)}
                 value={value}
               >
-                {products.map((product) => <option>{product.name}</option>)}
+                <option>--Select a Product--</option>
+                {products.map((product) => <option key={product._id}>{product.name}</option>)}
               </select>
             </div>
           </div>

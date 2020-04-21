@@ -8,6 +8,7 @@ import Form from "../../components/Form";
 import InputField from "../../components/Form/InputField";
 import Dropdown from "../../components/Form/Dropdown";
 import SubmitBtn from "../../components/Form/SubmitBtn";
+import HelpText from "../../components/Form/HelpText";
 import CheckBox from "../../components/Form/CheckBox";
 import OrdersTable from "../../components/OrdersTable";
 
@@ -33,7 +34,7 @@ function Admin() {
     quantity: "",
     image: "",
     description: "",
-    delete: false,
+    deleteChecked: false,
     error: "",
     success: ""
   });
@@ -52,9 +53,9 @@ function Admin() {
   }
 
   useEffect( () => {
+    console.log("running useEffect");
     loadProducts();
   }, [])
-
   
   const handleNewProdChange = (name) => (event) => {
     setNewProductVals({ ...newProductVals, error: false, [name]: event.target.value });
@@ -86,6 +87,19 @@ function Admin() {
             error: "",
             success: true,
           });
+          setTimeout(() => {
+            setNewProductVals({
+              name: "",
+              price: "",
+              category: "",
+              quantity: "",
+              image: "",
+              description: "",
+              error: "",
+              success: false 
+            });
+          }, 1500);
+          loadProducts();
         }
       })
       .catch((err) => {
@@ -98,7 +112,36 @@ function Admin() {
   };
 
   const handleExistingProdChange = (name) => (event) => {
-    setExistingProductVals({ ...existingProductVals, error: false, [name]: event.target.value });
+    if (name !== "name") {
+      setExistingProductVals({ ...existingProductVals, error: false, [name]: event.target.value });
+    }
+    else if (event.target.value === "--Select a Product--"){
+      setExistingProductVals({ ...existingProductVals,
+        name: "",
+        price: "",
+        category: "",
+        quantity: "",
+        image: "",
+        description: "",
+        error: false,
+      });
+
+    }
+    else {
+      products.forEach((product) => {
+        if (product.name === event.target.value) {
+          setExistingProductVals({ ...existingProductVals,
+            name: product.name,
+            price: product.price,
+            category: product.category,
+            quantity: product.quantity,
+            image: product.image,
+            description: product.description,
+            error: false,
+          });
+        }
+      });
+    }
   };
 
   const handleCheckboxChange = (event) => {
@@ -106,44 +149,116 @@ function Admin() {
     setExistingProductVals({ ...existingProductVals, error: false, [name]: !existingProductVals[name] });
   };
 
+  const deleteExisting = (productId) => {
+    adminAPI.deleteProduct(user._id, token, productId)
+      .then((res) => {
+        if (res.error) {
+          setExistingProductVals({ ...existingProductVals, error: res.error, success: false });
+        } else {
+          setExistingProductVals({
+            name: "",
+            price: "",
+            category: "",
+            quantity: "",
+            image: "",
+            description: "",
+            deleteChecked: existingProductVals.deleteChecked,
+            error: "",
+            success: "Product Deleted!",
+          });
+          setTimeout(() => {
+            setExistingProductVals({
+              name: "",
+              price: "",
+              category: "",
+              quantity: "",
+              image: "",
+              description: "",
+              deleteChecked: existingProductVals.deleteChecked,
+              error: "",
+              success: false 
+            });
+          }, 1500);
+          loadProducts();
+        }
+      })
+      .catch((err) => {
+        setExistingProductVals({
+          ...existingProductVals,
+          error: err.response.data.error,
+          success: false,
+        });
+      });
+  }
+
+  const updateExisting = (productId) => {
+    const { name, price, category, quantity, image, description } = existingProductVals;
+    adminAPI.updateProduct(user._id, token, productId, {
+      name,
+      price,
+      category,
+      quantity,
+      image,
+      description
+    })
+      .then((res) => {
+        if (res.error) {
+          setExistingProductVals({ ...existingProductVals, error: res.error, success: false });
+        } else {
+          setExistingProductVals({
+            name: "",
+            price: "",
+            category: "",
+            quantity: "",
+            image: "",
+            description: "",
+            deleteChecked: existingProductVals.deleteChecked,
+            error: "",
+            success: "Product Updated!",
+          });
+          setTimeout(() => {
+            setExistingProductVals({
+              name: "",
+              price: "",
+              category: "",
+              quantity: "",
+              image: "",
+              description: "",
+              deleteChecked: existingProductVals.deleteChecked,
+              error: "",
+              success: false 
+            });
+          }, 1500);
+          loadProducts();
+        }
+      })
+      .catch((err) => {
+        setExistingProductVals({
+          ...existingProductVals,
+          error: err.response.data.error,
+          success: false,
+        });
+      });     
+  }
+
   const handleExistingProdSubmit = (event) => {
     event.preventDefault();
-    // setExistingProductVals({ ...existingProductVals, error: false, success: false});
-    // const { name, price, category, quantity, image, description } = existingProductVals;
-    // adminAPI.updateProduct(user._id, token, productId, {
-    //   name,
-    //   price,
-    //   category,
-    //   quantity,
-    //   image,
-    //   description
-    // })
-    //   .then((res) => {
-    //     if (res.error) {
-    //       setNewProductVals({ ...newProductVals, error: res.error, success: false });
-    //     } else {
-    //       setNewProductVals({
-    //         name: "",
-    //         price: "",
-    //         category: "",
-    //         quantity: "",
-    //         image: "",
-    //         description: "",
-    //         error: "",
-    //         success: true,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setNewProductVals({
-    //       ...newProductVals,
-    //       error: err.response.data.error,
-    //       success: false,
-    //     });
-    //   });   
+    setExistingProductVals({ ...existingProductVals, error: false, success: false});
+    if (existingProductVals.name) {
+      let productId = "";
+      products.forEach((product) => {
+        if (product.name === existingProductVals.name) {
+          productId = product._id;
+        }
+      });
+      if (existingProductVals.deleteChecked) {
+        deleteExisting(productId);
+      }
+      else {
+        updateExisting(productId);
+      }  
+    }
   };
-
-
 
   return (
     <>
@@ -210,6 +325,12 @@ function Admin() {
                       <SubmitBtn onSubmit={handleNewProdSubmit} />
                     </div>
                   </div>
+                  <HelpText toggle={newProductVals.error} textSize="6" color="is-danger">
+                    {newProductVals.error}
+                  </HelpText>
+                  <HelpText toggle={newProductVals.success} textSize="6" color="is-success">
+                    New Product Added!
+                  </HelpText>
                 </Form>
               </div>
             </div>
@@ -223,15 +344,7 @@ function Admin() {
                     value={existingProductVals.name}
                     products={products}
                   />
-                  {/* <InputField
-                    name="name"
-                    label="Name:"
-                    type="text"
-                    placeholder="name"
-                    onChange={handleExistingProdChange}
-                    value={existingProductVals.name}
-                  /> */}
-                  { existingProductVals.delete ?
+                  { existingProductVals.deleteChecked || existingProductVals.name === "" ?
                     <fieldset disabled>
                       <InputField
                         name="price"
@@ -273,7 +386,8 @@ function Admin() {
                         onChange={handleExistingProdChange}
                         value={existingProductVals.description}
                       />
-                    </fieldset> :
+                    </fieldset>
+                    :
                     <>
                       <InputField
                         name="price"
@@ -322,13 +436,19 @@ function Admin() {
                     <div className="field-body">
                       <SubmitBtn onSubmit={handleExistingProdSubmit} />
                       <CheckBox 
-                        name="delete"
+                        name="deleteChecked"
                         label="Delete Product"
                         onChange={handleCheckboxChange}
-                        isSelected={existingProductVals.delete}
+                        isSelected={existingProductVals.deleteChecked}
                       />
                     </div>
                   </div>
+                  <HelpText toggle={existingProductVals.error} textSize="6" color="is-danger">
+                    {existingProductVals.error}
+                  </HelpText>
+                  <HelpText toggle={existingProductVals.success} textSize="6" color="is-success">
+                    {existingProductVals.success}
+                  </HelpText>
                 </Form>
               </div>
             </div>

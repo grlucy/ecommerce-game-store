@@ -86,10 +86,10 @@ function SignIn() {
           icon="fas fa-lock"
         />
         <SubmitBtn onSubmit={handleFormSubmit} />
-        <HelpText toggle={values.error} color="is-danger">
+        <HelpText toggle={values.error} textSize="5" color="is-danger">
           {values.error}
         </HelpText>
-        <HelpText toggle={values.loading} color="is-info">
+        <HelpText toggle={values.loading} textSize="5" color="is-info">
           Loading...
         </HelpText>
         <hr />
