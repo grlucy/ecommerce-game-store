@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 
 function OrdersTable(props) {
-
   return (
     <>
       <h3 className="title is-4 has-text-centered">{props.title}</h3>
@@ -17,9 +16,7 @@ function OrdersTable(props) {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          {/* render data rows here */}
-        </tbody>
+        <tbody>{/* render data rows here */}</tbody>
       </table>
     </>
   );

@@ -15,6 +15,8 @@ import OrdersTable from "../../components/OrdersTable";
 function Admin() {
   const [products, setProducts] = useState([]);
 
+  const [orders, setOrders] = useState([]);
+
   const [newProductVals, setNewProductVals] = useState({
     name: "",
     price: "",
@@ -51,7 +53,15 @@ function Admin() {
   };
 
   const loadOpenOrders = () => {
-    console.log("in load orders function");
+    console.log("user:", user);
+    console.log("token:", token);
+    adminAPI.listOrders(user._id, token).then((res) => {
+      if (res.error) {
+        console.log(res.error);
+      } else {
+        setOrders(res.data);
+      }
+    });
   };
 
   useEffect(() => {
@@ -518,7 +528,7 @@ function Admin() {
             </div>
             <div className="tile is-parent">
               <div className="tile is-child tile-overflow">
-                <OrdersTable title="UNFILLED ORDERS" />
+                <OrdersTable title="UNFILLED ORDERS" orders={orders} />
               </div>
             </div>
           </div>
