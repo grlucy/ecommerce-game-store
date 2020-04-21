@@ -6,6 +6,7 @@ const {
   addOrderToUserHistory,
 } = require("../../controllers/userController");
 const { create } = require("../../controllers/orderController");
+const { decreaseQuantity } = require("../../controllers/productController");
 
 // Matches with "/api/order"
 
@@ -14,6 +15,7 @@ router.post(
   requireSignin,
   isAuth,
   addOrderToUserHistory,
+  decreaseQuantity,
   create
 );
 
