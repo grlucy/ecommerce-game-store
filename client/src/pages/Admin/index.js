@@ -52,9 +52,13 @@ function Admin() {
     })
   }
 
+  const loadOpenOrders = () => {
+    console.log("in load orders function");
+  }
+
   useEffect( () => {
-    console.log("running useEffect");
     loadProducts();
+    loadOpenOrders();
   }, [])
   
   const handleNewProdChange = (name) => (event) => {
