@@ -16,6 +16,17 @@ function NavMenu(props) {
         <Link to="/contact" className={location.pathname === "/contact" ? "navbar-item is-active" : "navbar-item"}>
           Contact  
         </Link>
+        {isAuthenticated() && isAuthenticated().user.role === "Customer" && (
+          <Link to="/account" className={location.pathname === "/account" ? "navbar-item is-active" : "navbar-item"}>
+            Account
+          </Link>
+        )}
+        {isAuthenticated() && isAuthenticated().user.role === "Admin" && (
+          <Link to="/admin" className={location.pathname === "/admin" ? "navbar-item is-active" : "navbar-item"}>
+            Admin
+          </Link>
+        )}
+
         <Link to="/cart" className={location.pathname === "/cart" ? "navbar-item is-active" : "navbar-item"}>
           <i className="fas fa-shopping-cart"></i>
         </Link>

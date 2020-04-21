@@ -1,8 +1,8 @@
 import React from "react";
 
-function InputField(props) {
+function AuthInputField(props) {
 
-  const { name, label, type, placeholder, onChange, value, icon, help } = props;
+  const { name, label, type, placeholder, onChange, value, icon} = props;
 
   return (
     <div className="field">
@@ -23,4 +23,4 @@ function InputField(props) {
   );
 }
 
-export default InputField;
+export default AuthInputField;

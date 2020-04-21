@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
-import { authenticate } from "../../utils/auth";
+import { authenticate, isAuthenticated } from "../../utils/auth";
 import AuthForm from "../../components/AuthForm";
-import InputField from "../../components/AuthForm/InputField";
-import SubmitBtn from "../../components/AuthForm/SubmitBtn";
-import HelpText from "../../components/AuthForm/HelpText";
+import AuthInputField from "../../components/AuthForm/AuthInputField";
+import SubmitBtn from "../../components/Form/SubmitBtn";
+import HelpText from "../../components/Form/HelpText";
 import LinkBtn from "../../components/LinkBtn";
 
 function SignIn() {
@@ -16,6 +16,8 @@ function SignIn() {
     loading: false,
     redirectToReferrer: false,
   });
+
+  const { user } = isAuthenticated();
 
   const handleInputChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -50,15 +52,22 @@ function SignIn() {
   };
 
   const redirectUser = () => {
-    if (values.redirectToReferrer) {
-      return <Redirect to="/" />;
+    if (values.redirectToReferrer) {  //redirect user appropriately after login
+      if (user && user.role === "Admin") {
+        return <Redirect to="/admin" />
+      } else {
+        return <Redirect to="/account" />
+      }
+    }
+    if (isAuthenticated()) {  //this catches authenticated non-admin users redirected here from /admin route
+      return <Redirect to="/" />
     }
   };
 
   return (
     <>
       <AuthForm title="SIGN IN">
-        <InputField
+        <AuthInputField
           name="email"
           label="Email Address:"
           type="email"
@@ -67,7 +76,7 @@ function SignIn() {
           value={values.email}
           icon="fas fa-envelope"
         />
-        <InputField
+        <AuthInputField
           name="password"
           label="Password:"
           type="password"
@@ -77,10 +86,10 @@ function SignIn() {
           icon="fas fa-lock"
         />
         <SubmitBtn onSubmit={handleFormSubmit} />
-        <HelpText toggle={values.error} color="is-danger">
+        <HelpText toggle={values.error} textSize="5" color="is-danger">
           {values.error}
         </HelpText>
-        <HelpText toggle={values.loading} color="is-info">
+        <HelpText toggle={values.loading} textSize="5" color="is-info">
           Loading...
         </HelpText>
         <hr />

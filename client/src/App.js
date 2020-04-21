@@ -12,6 +12,7 @@ import ContentWrapper from "./components/ContentWrapper";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
+import AdminRoute from "./utils/AdminRoute";
 
 class App extends Component {
   render() {
@@ -21,13 +22,13 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
-            <PrivateRoute exact path="/admin" component={Admin} />
+            <PrivateRoute exact path="/account" component={Account} />
+            <AdminRoute exact path="/admin" component={Admin} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/store" component={Store} />
-            <PrivateRoute exact path="/account" component={Account} />
           </Switch>
         </ContentWrapper>
         <Footer />

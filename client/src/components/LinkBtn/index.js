@@ -5,7 +5,7 @@ function LinkBtn(props) {
 
   return (
     <Link to={props.route}>
-      <button className="button is-danger is-small is-light">{props.children}</button>
+      <button className="button is-danger is-small is-outlined">{props.children}</button>
     </Link>
   );
 }
