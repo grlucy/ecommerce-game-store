@@ -1,17 +1,16 @@
 const router = require("express").Router();
 
+const { requireSignin, isAuth } = require("../../controllers/authController");
 const {
-  requireSignin,
-  isAuth,
-  isAdmin,
-} = require("../../controllers/authController");
-const { userById, addOrderToUserHistory } = require("../../controllers/userController");
+  userById,
+  addOrderToUserHistory,
+} = require("../../controllers/userController");
 const { create } = require("../../controllers/orderController");
 
 // Matches with "/api/order"
 
 router.post(
-  "/order/create/userId",
+  "/order/create/:userId",
   requireSignin,
   isAuth,
   addOrderToUserHistory,
