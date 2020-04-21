@@ -10,7 +10,7 @@ const { create } = require("../../controllers/orderController");
 // Matches with "/api/order"
 
 router.post(
-  "/order/create/:userId",
+  "/create/:userId",
   requireSignin,
   isAuth,
   addOrderToUserHistory,
