@@ -7,9 +7,23 @@ exports.create = (req, res) => {
   order.save((err, order) => {
     if (err) {
       return res.status(400).json({
-        error: errorHandler(err)
+        error: errorHandler(err),
       });
     }
     res.json(order);
   });
+};
+
+exports.listOrders = (req, res) => {
+  Order.find()
+    .populate("user", "_id name email")
+    .sort("-created")
+    .exec((err, orders) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler(err),
+        });
+      }
+      res.json(orders);
+    });
 };
