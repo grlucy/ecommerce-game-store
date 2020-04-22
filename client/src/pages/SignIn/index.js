@@ -87,7 +87,7 @@ function SignIn() {
           value={values.password}
           icon="fas fa-lock"
         />
-        <SubmitBtn onSubmit={handleFormSubmit} />
+        <SubmitBtn onSubmit={handleFormSubmit}>SUBMIT</SubmitBtn>
         <HelpText toggle={values.error} textSize="5" color="is-danger">
           {values.error}
         </HelpText>

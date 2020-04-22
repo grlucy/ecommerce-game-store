@@ -1,0 +1,29 @@
+.product-img {
+  height: 30vh;
+  width: 30vh;
+  object-fit: cover;
+}
+
+.quantity-field {
+  width: 52px;
+}
+
+.quantity-label {
+  margin-right: 8px;
+}
+
+.store-item {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dbdbdb;
+  margin: 0, 2vh;
+}
+
+.tile.is-ancestor {
+  margin-bottom: 2vh;
+  margin-top: 0;
+}
+
+.tile.is-ancestor:last-child {
+  margin-bottom: 2vh;
+}

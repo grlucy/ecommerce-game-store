@@ -43,7 +43,7 @@ function Admin() {
   const { user, token } = isAuthenticated();
 
   const loadProducts = () => {
-    adminAPI.getProducts().then((res) => {
+    API.getProducts().then((res) => {
       if (res.error) {
         console.log(res.error);
       } else {
@@ -392,7 +392,7 @@ function Admin() {
                     <div className="field is-horizontal">
                       <div className="field-label"></div>
                       <div className="field-body">
-                        <SubmitBtn onSubmit={handleNewProdSubmit} />
+                        <SubmitBtn onSubmit={handleNewProdSubmit}>SUBMIT</SubmitBtn>
                       </div>
                     </div>
                     <HelpText
@@ -513,7 +513,7 @@ function Admin() {
                     <div className="field is-horizontal" id="update-controls">
                       <div className="field-label"></div>
                       <div className="field-body">
-                        <SubmitBtn onSubmit={handleExistingProdSubmit} />
+                        <SubmitBtn onSubmit={handleExistingProdSubmit}>SUBMIT</SubmitBtn>
                         <CheckBox
                           name="deleteChecked"
                           label="Delete Product"

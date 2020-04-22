@@ -9,15 +9,7 @@ export default {
     });
   },
 
-  getProducts: function () {
-    return axios.get("api/products/list");
-  },
-
-  getProduct: function (productId) {
-    return axios.get(`api/product/${productId}`);
-  },
-
-  updateProduct: function (userId, token, productId, productData) {
+  updateProduct: function(userId, token, productId, productData) {
     return axios.put(`api/product/${productId}/${userId}`, productData, {
       headers: {
         Authorization: `Bearer ${token}`,
