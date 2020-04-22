@@ -4,6 +4,8 @@ import { isAuthenticated } from "../../utils/auth";
 import "./style.css";
 
 function Account() {
+  const moment = require("moment");
+
   const {
     user: { name, email },
   } = isAuthenticated();
@@ -55,20 +57,47 @@ function Account() {
               {orders.map((order) => (
                 <div key={order._id}>
                   <hr />
-                  <table className="table is-fullwidth">
-                    <thead>
-                      <tr>
-                        <th>Order #</th>
-                        <th>{order._id}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Date</th>
-                        <td>{order.createdAt}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div className="table-container">
+                    <table className="table is-fullwidth">
+                      <thead>
+                        <tr>
+                          <th>Order #</th>
+                          <th>{order._id}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>Date</th>
+                          <td>
+                            {moment(order.createdAt).format("MM-DD-YYYY")}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Pickup</th>
+                          <td>{order.pickup}</td>
+                        </tr>
+                        <tr>
+                          <th>Total</th>
+                          <td>${order.amount}</td>
+                        </tr>
+                        <tr>
+                          <th>Products</th>
+                          <td>
+                            {order.products.map((product) => (
+                              <>
+                                <p className="has-text-weight-bold">
+                                  {product.name}
+                                </p>
+                                <p>Price: ${product.price}</p>
+                                <p>Quantity: {product.count}</p>
+                                <br />
+                              </>
+                            ))}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               ))}
             </div>
