@@ -55,7 +55,20 @@ function Account() {
               {orders.map((order) => (
                 <div key={order._id}>
                   <hr />
-                  <p>Order #: {order._id}</p>
+                  <table className="table is-fullwidth">
+                    <thead>
+                      <tr>
+                        <th>Order #</th>
+                        <th>{order._id}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Date</th>
+                        <td>{order.createdAt}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               ))}
             </div>
