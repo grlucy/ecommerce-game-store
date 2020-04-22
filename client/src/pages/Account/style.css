@@ -1,3 +1,4 @@
-.card {
-  margin-bottom: 30px;
+.theme-border {
+  padding: 36px;
+  border: 1px solid #dbdbdb;
 }

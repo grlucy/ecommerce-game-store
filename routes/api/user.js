@@ -10,6 +10,13 @@ const {
 
 router.get("/:userId", requireSignin, isAuth, userController.read);
 
+router.get(
+  "/order-history/:userId",
+  requireSignin,
+  isAuth,
+  userController.purchaseHistory
+);
+
 router.param("userId", userController.userById);
 
 module.exports = router;

@@ -44,7 +44,7 @@ const productSeed = [
     quantity: 10,
     image: "https://dragonsden12.s3.amazonaws.com/products/skylinepuzzle.jpg",
     description:
-      "A 1,000-piece puzzle that depicts a photograph of a cityscape.",
+      "A 1,000-piece puzzle that features a photograph of a cityscape.",
     numberSold: 12,
   },
   {
@@ -53,7 +53,8 @@ const productSeed = [
     category: "Puzzles",
     quantity: 15,
     image: "https://dragonsden12.s3.amazonaws.com/products/flowerpuzzle.jpg",
-    description: "A 500-piece puzzle that depicts a white flowers.",
+    description:
+      "A 500-piece puzzle that features a photograph of white flowers.",
     numberSold: 2,
   },
   {
@@ -63,7 +64,7 @@ const productSeed = [
     quantity: 0,
     image: "https://dragonsden12.s3.amazonaws.com/products/puppypuzzle.jpg",
     description:
-      "A 30-piece puzzle ideal for young children that depicts a puppy.",
+      "A 30-piece puzzle ideal for young children that features a photograph of a puppy.",
     numberSold: 25,
   },
   {
