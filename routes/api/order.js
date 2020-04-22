@@ -9,7 +9,12 @@ const {
   userById,
   addOrderToUserHistory,
 } = require("../../controllers/userController");
-const { create, listOrders } = require("../../controllers/orderController");
+const {
+  create,
+  listOrders,
+  updateOrderStatus,
+  orderById,
+} = require("../../controllers/orderController");
 const { decreaseQuantity } = require("../../controllers/productController");
 
 // Matches with "/api/order"
@@ -25,6 +30,16 @@ router.post(
 
 router.get("/list/:userId", requireSignin, isAuth, isAdmin, listOrders);
 
+router.put(
+  "/:orderId/status/:userId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  updateOrderStatus
+);
+
 router.param("userId", userById);
+
+router.param("orderId", orderById);
 
 module.exports = router;
