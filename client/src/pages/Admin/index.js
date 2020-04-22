@@ -43,7 +43,7 @@ function Admin() {
   const { user, token } = isAuthenticated();
 
   const loadProducts = () => {
-    adminAPI.getProducts().then((res) => {
+    API.getProducts().then((res) => {
       if (res.error) {
         console.log(res.error);
       } else {
