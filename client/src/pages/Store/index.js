@@ -31,7 +31,7 @@ function Store() {
   }
 
   const loadCategoryList = () => {
-    adminAPI.getCategories()
+    API.getCategories()
     .then((res) => {
       if(res.error) {
         console.log(res.error);
@@ -48,7 +48,7 @@ function Store() {
   }
 
   const loadProductData = () => {
-    adminAPI.getProducts()
+    API.getProducts()
     .then((res) => {
       if(res.error) {
         console.log(res.error);
