@@ -45,6 +45,7 @@ exports.orderById = (req, res, next, id) => {
 
 // ADMIN ONLY --- Change order status from unfilled to filled
 exports.updateOrderStatus = (req, res) => {
+  console.log("orderController req.body is: ", req.body);
   Order.update(
     { _id: req.body.orderId },
     { $set: { status: req.body.status } },

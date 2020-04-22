@@ -2,8 +2,6 @@ import React from "react";
 import "./style.css";
 
 function OrdersTable(props) {
-  console.log(props.orders);
-
   return (
     <>
       <h3 className="title is-4 has-text-centered">{props.title}</h3>
@@ -32,7 +30,11 @@ function OrdersTable(props) {
                 ))}
               </td>
               <td>{order.pickup}</td>
-              <td></td>
+              <td>
+                <button onClick={() => props.onClick(order._id, "Filled")}>
+                  Filled
+                </button>
+              </td>
             </tr>
           ))}
           {props.orders.length < 1 ? (

@@ -62,6 +62,22 @@ function Admin() {
     });
   };
 
+  const updateOrderStatus = (orderId, status) => {
+    const orderData = {
+      orderId: orderId,
+      status: status,
+    };
+    adminAPI
+      .updateOrderStatus(user._id, token, orderId, orderData)
+      .then((res) => {
+        if (res.error) {
+          console.log(res.error);
+        } else {
+          loadOpenOrders();
+        }
+      });
+  };
+
   useEffect(() => {
     loadProducts();
     loadOpenOrders();
@@ -351,7 +367,7 @@ function Admin() {
                     />
                     <InputField
                       name="quantity"
-                      label="Quantity"
+                      label="Quantity:"
                       type="number"
                       placeholder="quantity"
                       onChange={handleNewProdChange}
@@ -427,7 +443,7 @@ function Admin() {
                         />
                         <InputField
                           name="quantity"
-                          label="Quantity"
+                          label="Quantity:"
                           type="number"
                           placeholder="quantity"
                           onChange={handleExistingProdChange}
@@ -470,7 +486,7 @@ function Admin() {
                         />
                         <InputField
                           name="quantity"
-                          label="Quantity"
+                          label="Quantity:"
                           type="number"
                           placeholder="quantity"
                           onChange={handleExistingProdChange}
@@ -526,7 +542,11 @@ function Admin() {
             </div>
             <div className="tile is-parent">
               <div className="tile is-child tile-overflow">
-                <OrdersTable title="UNFILLED ORDERS" orders={orders} />
+                <OrdersTable
+                  title="UNFILLED ORDERS"
+                  orders={orders}
+                  onClick={updateOrderStatus}
+                />
               </div>
             </div>
           </div>

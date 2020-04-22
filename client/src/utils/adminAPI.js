@@ -40,4 +40,12 @@ export default {
       },
     });
   },
+
+  updateOrderStatus: function (userId, token, orderId, orderData) {
+    return axios.put(`api/order/${orderId}/status/${userId}`, orderData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
