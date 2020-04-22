@@ -29,29 +29,6 @@ function Store() {
     setStockedChecked(!stockedChecked);
   }
 
-  // const buildCategoryList = (products) => {
-  //   const categories = [];
-  //   products.forEach((product) => {
-  //     let catInArray = false;
-  //     console.log("Product category is: " + product.category);
-  //     categories.forEach((category) => {
-  //       if (product.category === category) {
-  //         catInArray = true;
-  //       }
-  //     });
-  //     if (!catInArray) {
-  //       categories.push(product.category);
-  //     }
-  //   });
-  //   setCategories(categories.map((category, index) => {
-  //     return {
-  //       id: index,
-  //       name: category,
-  //       isChecked: false
-  //     }
-  //   }));
-  // }
-
   const loadCategoryList = () => {
     adminAPI.getCategories()
     .then((res) => {
@@ -80,6 +57,14 @@ function Store() {
     });
   }
 
+  const productShouldRender = (product) => {
+    let stockOK = false;
+    let catOK = false;
+    if (!stockedChecked || product.quantity > 0) stockOK = true;
+    if (selectedCat === "None" || selectedCat === product.category) catOK = true;
+    return stockOK && catOK;
+  }
+
   useEffect( () => {
     loadProductData();
     loadCategoryList();
@@ -106,9 +91,11 @@ function Store() {
           </div>
           <div className="column is-three-quarters">
             {products.map((product) => {
-              return (
-                <StoreItem product={product} key={product._id} />
-              );
+              if (productShouldRender(product)) {
+                return (
+                  <StoreItem product={product} key={product._id} />
+                );
+              }
             })}
           </div>
         </div>
