@@ -18,13 +18,13 @@ function Account() {
               <ul>
                 <li>
                   <span className="icon">
-                    <i className="fas fa-user"></i>
+                    <i className="fas fa-user"></i>&nbsp;
                   </span>
                   {name}
                 </li>
                 <li>
                   <span className="icon">
-                    <i className="fas fa-envelope"></i>
+                    <i className="fas fa-envelope"></i>&nbsp;
                   </span>
                   {email}
                 </li>
