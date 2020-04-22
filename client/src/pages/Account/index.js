@@ -4,41 +4,40 @@ import { isAuthenticated } from "../../utils/auth";
 import "./style.css";
 
 function Account() {
-
-  const { user : { name, email }} = isAuthenticated();
+  const {
+    user: { name, email },
+  } = isAuthenticated();
 
   return (
     <section className="section">
       <div className="container">
-        <div className="card account-card">
-          <header className="card-header">
-            <h3 className="card-header-title">User Information</h3>
-          </header>
-          <div className="card-content">
-            <ul>
-              <li>
-                <span className="icon">
-                  <i className="fas fa-user"></i>
-                </span>
-                {name}
-              </li>
-              <li>
-                <span className="icon">
-                  <i className="fas fa-envelope"></i>
-                </span>
-                {email}
-              </li>
-            </ul>
+        <div className="columns">
+          <div className="column is-one-third">
+            <div className="theme-border">
+              <h4 className="title is-4">User Information</h4>
+              <ul>
+                <li>
+                  <span className="icon">
+                    <i className="fas fa-user"></i>
+                  </span>
+                  {name}
+                </li>
+                <li>
+                  <span className="icon">
+                    <i className="fas fa-envelope"></i>
+                  </span>
+                  {email}
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="card account-card">
-          <header className="card-header">
-            <h3 className="card-header-title">Order History</h3>
-          </header>
-          <div className="card-content">
-            <ul>
-              <li>history</li>
-            </ul>
+          <div className="column">
+            <div className="theme-border">
+              <h4 className="title is-4">Order History</h4>
+              <ul>
+                <li>history</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
