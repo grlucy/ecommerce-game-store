@@ -7,9 +7,55 @@ exports.create = (req, res) => {
   order.save((err, order) => {
     if (err) {
       return res.status(400).json({
-        error: errorHandler(err)
+        error: errorHandler(err),
       });
     }
     res.json(order);
   });
+};
+
+// ADMIN ONLY --- Returns all unfilled orders
+exports.listOrders = (req, res) => {
+  Order.find({ status: "Unfilled" })
+    .populate("user", "_id name email")
+    .sort("-created")
+    .exec((err, orders) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler(err),
+        });
+      }
+      res.json(orders);
+    });
+};
+
+exports.orderById = (req, res, next, id) => {
+  Order.findById(id)
+    .populate("products.product", "name price")
+    .exec((err, order) => {
+      if (err || !order) {
+        return res.status(400).json({
+          error: errorHandler(err),
+        });
+      }
+      req.order = order;
+      next();
+    });
+};
+
+// ADMIN ONLY --- Change order status from unfilled to filled
+exports.updateOrderStatus = (req, res) => {
+  console.log("orderController req.body is: ", req.body);
+  Order.update(
+    { _id: req.body.orderId },
+    { $set: { status: req.body.status } },
+    (err, order) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler(err),
+        });
+      }
+      res.json(order);
+    }
+  );
 };

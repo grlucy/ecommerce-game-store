@@ -29,7 +29,8 @@ exports.addOrderToUserHistory = (req, res, next) => {
       category: item.category,
       quantity: item.count,
       transaction_id: req.body.order.transaction_id,
-      amount: req.body.order.amount
+      amount: req.body.order.amount,
+      pickup: req.body.order.pickup,
     });
   });
 
@@ -40,10 +41,10 @@ exports.addOrderToUserHistory = (req, res, next) => {
     (err, user) => {
       if (err) {
         return res.status(400).json({
-          error: "Could not update user purchase history"
+          error: "Could not update user purchase history",
         });
       }
       next();
     }
   );
-}
+};
