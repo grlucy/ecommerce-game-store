@@ -29,7 +29,7 @@ function NavMenu(props) {
           </Link>
         )}
         <Link to="/cart" className={location.pathname === "/cart" ? "navbar-item is-active" : "navbar-item"}>
-        <i className="fas fa-shopping-cart"></i> <sup><small className="cart-badge">{itemTotal() ? itemTotal() : ""}</small></sup>
+        <i className="fas fa-shopping-cart"></i> {itemTotal() ? <sup><small className="cart-badge">{itemTotal()}</small></sup> : <></>}
         </Link>
         {!isAuthenticated() && (
           <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
