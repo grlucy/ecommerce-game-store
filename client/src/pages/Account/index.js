@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 import { isAuthenticated } from "../../utils/auth";
 import "./style.css";
 
@@ -7,6 +7,24 @@ function Account() {
   const {
     user: { name, email },
   } = isAuthenticated();
+
+  const { user, token } = isAuthenticated();
+
+  const [orders, setOrders] = useState([]);
+
+  const loadOrderHistory = () => {
+    userAPI.getPurchaseHistory(user._id, token).then((res) => {
+      if (res.error) {
+        console.log(res.error);
+      } else {
+        setOrders(res.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    loadOrderHistory();
+  }, []);
 
   return (
     <section className="section">
@@ -34,9 +52,12 @@ function Account() {
           <div className="column">
             <div className="theme-border">
               <h4 className="title is-4">Order History</h4>
-              <ul>
-                <li>history</li>
-              </ul>
+              {orders.map((order) => (
+                <div key={order._id}>
+                  <hr />
+                  <p>Order #: {order._id}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
