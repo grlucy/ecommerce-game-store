@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { signout, isAuthenticated } from "../../utils/auth";
+import { itemTotal } from "../../utils/cartHelpers";
+import "./style.css";
 
 function NavMenu(props) {
 
@@ -26,9 +28,8 @@ function NavMenu(props) {
             Admin
           </Link>
         )}
-
         <Link to="/cart" className={location.pathname === "/cart" ? "navbar-item is-active" : "navbar-item"}>
-          <i className="fas fa-shopping-cart"></i>
+        <i className="fas fa-shopping-cart"></i> <sup><small className="cart-badge">{itemTotal() ? itemTotal() : ""}</small></sup>
         </Link>
         {!isAuthenticated() && (
           <Link to="/signin" className={location.pathname === "/signin" ? "navbar-item is-active" : "navbar-item"}>
