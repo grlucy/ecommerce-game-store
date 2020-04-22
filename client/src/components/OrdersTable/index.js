@@ -31,7 +31,10 @@ function OrdersTable(props) {
               </td>
               <td>{order.pickup}</td>
               <td>
-                <button onClick={() => props.onClick(order._id, "Filled")}>
+                <button
+                  className="button is-danger is-small"
+                  onClick={() => props.onClick(order._id, "Filled")}
+                >
                   Filled
                 </button>
               </td>
