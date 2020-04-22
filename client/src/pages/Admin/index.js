@@ -13,10 +13,11 @@ import CheckBox from "../../components/Form/CheckBox";
 import OrdersTable from "../../components/OrdersTable";
 
 function Admin() {
+  const [products, setProducts] = useState([]);
 
-  const [ products, setProducts ] = useState([]);
+  const [orders, setOrders] = useState([]);
 
-  const [ newProductVals, setNewProductVals ] = useState({
+  const [newProductVals, setNewProductVals] = useState({
     name: "",
     price: "",
     category: "",
@@ -24,10 +25,10 @@ function Admin() {
     image: "",
     description: "",
     error: "",
-    success: ""
+    success: "",
   });
 
-  const [ existingProductVals, setExistingProductVals ] = useState({
+  const [existingProductVals, setExistingProductVals] = useState({
     name: "",
     price: "",
     category: "",
@@ -36,50 +37,87 @@ function Admin() {
     description: "",
     deleteChecked: false,
     error: "",
-    success: ""
+    success: "",
   });
 
   const { user, token } = isAuthenticated();
 
   const loadProducts = () => {
-    adminAPI.getProducts()
-    .then((res) => {
-      if(res.error) {
+    adminAPI.getProducts().then((res) => {
+      if (res.error) {
         console.log(res.error);
       } else {
         setProducts(res.data);
       }
-    })
-  }
+    });
+  };
 
   const loadOpenOrders = () => {
-    console.log("in load orders function");
-  }
+    adminAPI.listOrders(user._id, token).then((res) => {
+      if (res.error) {
+        console.log(res.error);
+      } else {
+        setOrders(res.data);
+      }
+    });
+  };
 
-  useEffect( () => {
+  const updateOrderStatus = (orderId, status) => {
+    const orderData = {
+      orderId: orderId,
+      status: status,
+    };
+    adminAPI
+      .updateOrderStatus(user._id, token, orderId, orderData)
+      .then((res) => {
+        if (res.error) {
+          console.log(res.error);
+        } else {
+          loadOpenOrders();
+        }
+      });
+  };
+
+  useEffect(() => {
     loadProducts();
     loadOpenOrders();
-  }, [])
-  
+  }, []);
+
   const handleNewProdChange = (name) => (event) => {
-    setNewProductVals({ ...newProductVals, error: false, [name]: event.target.value });
+    setNewProductVals({
+      ...newProductVals,
+      error: false,
+      [name]: event.target.value,
+    });
   };
 
   const handleNewProdSubmit = (event) => {
     event.preventDefault();
-    setNewProductVals({ ...newProductVals, error: false, success: false});
-    const { name, price, category, quantity, image, description } = newProductVals;
-    adminAPI.createProduct(user._id, token, {
+    setNewProductVals({ ...newProductVals, error: false, success: false });
+    const {
       name,
       price,
       category,
       quantity,
       image,
-      description
-    })
+      description,
+    } = newProductVals;
+    adminAPI
+      .createProduct(user._id, token, {
+        name,
+        price,
+        category,
+        quantity,
+        image,
+        description,
+      })
       .then((res) => {
         if (res.error) {
-          setNewProductVals({ ...newProductVals, error: res.error, success: false });
+          setNewProductVals({
+            ...newProductVals,
+            error: res.error,
+            success: false,
+          });
         } else {
           setNewProductVals({
             name: "",
@@ -100,7 +138,7 @@ function Admin() {
               image: "",
               description: "",
               error: "",
-              success: false 
+              success: false,
             });
           }, 1500);
           loadProducts();
@@ -112,15 +150,19 @@ function Admin() {
           error: err.response.data.error,
           success: false,
         });
-      });      
+      });
   };
 
   const handleExistingProdChange = (name) => (event) => {
     if (name !== "name") {
-      setExistingProductVals({ ...existingProductVals, error: false, [name]: event.target.value });
-    }
-    else if (event.target.value === "--Select a Product--"){
-      setExistingProductVals({ ...existingProductVals,
+      setExistingProductVals({
+        ...existingProductVals,
+        error: false,
+        [name]: event.target.value,
+      });
+    } else if (event.target.value === "--Select a Product--") {
+      setExistingProductVals({
+        ...existingProductVals,
         name: "",
         price: "",
         category: "",
@@ -129,12 +171,11 @@ function Admin() {
         description: "",
         error: false,
       });
-
-    }
-    else {
+    } else {
       products.forEach((product) => {
         if (product.name === event.target.value) {
-          setExistingProductVals({ ...existingProductVals,
+          setExistingProductVals({
+            ...existingProductVals,
             name: product.name,
             price: product.price,
             category: product.category,
@@ -150,14 +191,23 @@ function Admin() {
 
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
-    setExistingProductVals({ ...existingProductVals, error: false, [name]: !existingProductVals[name] });
+    setExistingProductVals({
+      ...existingProductVals,
+      error: false,
+      [name]: !existingProductVals[name],
+    });
   };
 
   const deleteExisting = (productId) => {
-    adminAPI.deleteProduct(user._id, token, productId)
+    adminAPI
+      .deleteProduct(user._id, token, productId)
       .then((res) => {
         if (res.error) {
-          setExistingProductVals({ ...existingProductVals, error: res.error, success: false });
+          setExistingProductVals({
+            ...existingProductVals,
+            error: res.error,
+            success: false,
+          });
         } else {
           setExistingProductVals({
             name: "",
@@ -180,7 +230,7 @@ function Admin() {
               description: "",
               deleteChecked: existingProductVals.deleteChecked,
               error: "",
-              success: false 
+              success: false,
             });
           }, 1500);
           loadProducts();
@@ -193,21 +243,33 @@ function Admin() {
           success: false,
         });
       });
-  }
+  };
 
   const updateExisting = (productId) => {
-    const { name, price, category, quantity, image, description } = existingProductVals;
-    adminAPI.updateProduct(user._id, token, productId, {
+    const {
       name,
       price,
       category,
       quantity,
       image,
-      description
-    })
+      description,
+    } = existingProductVals;
+    adminAPI
+      .updateProduct(user._id, token, productId, {
+        name,
+        price,
+        category,
+        quantity,
+        image,
+        description,
+      })
       .then((res) => {
         if (res.error) {
-          setExistingProductVals({ ...existingProductVals, error: res.error, success: false });
+          setExistingProductVals({
+            ...existingProductVals,
+            error: res.error,
+            success: false,
+          });
         } else {
           setExistingProductVals({
             name: "",
@@ -230,7 +292,7 @@ function Admin() {
               description: "",
               deleteChecked: existingProductVals.deleteChecked,
               error: "",
-              success: false 
+              success: false,
             });
           }, 1500);
           loadProducts();
@@ -242,12 +304,16 @@ function Admin() {
           error: err.response.data.error,
           success: false,
         });
-      });     
-  }
+      });
+  };
 
   const handleExistingProdSubmit = (event) => {
     event.preventDefault();
-    setExistingProductVals({ ...existingProductVals, error: false, success: false});
+    setExistingProductVals({
+      ...existingProductVals,
+      error: false,
+      success: false,
+    });
     if (existingProductVals.name) {
       let productId = "";
       products.forEach((product) => {
@@ -257,209 +323,231 @@ function Admin() {
       });
       if (existingProductVals.deleteChecked) {
         deleteExisting(productId);
-      }
-      else {
+      } else {
         updateExisting(productId);
-      }  
+      }
     }
   };
 
   return (
     <>
-      <div className="title page-title has-text-centered is-2">
-        ADMIN DASHBOARD
-      </div>
       <section className="section">
-        <div className="tile is-ancestor is-vertical">
-          <div className="tile is-parent">
-            <div className="tile is-child">
-              <div className="container form-container">
-                <Form title="ADD NEW PRODUCT">
-                  <InputField
-                    name="name"
-                    label="Name:"
-                    type="text"
-                    placeholder="name"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.name}
-                  />
-                  <InputField
-                    name="price"
-                    label="Price:"
-                    type="number"
-                    placeholder="price"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.price}
-                  />
-                  <InputField
-                    name="category"
-                    label="Category:"
-                    type="text"
-                    placeholder="category"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.category}
-                  />
-                  <InputField
-                    name="quantity"
-                    label="Quantity"
-                    type="number"
-                    placeholder="quantity"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.quantity}
-                  />
-                  <InputField
-                    name="image"
-                    label="Image:"
-                    type="url"
-                    placeholder="url"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.image}
-                  />
-                  <InputField
-                    name="description"
-                    label="Description:"
-                    type="text"
-                    placeholder="description"
-                    onChange={handleNewProdChange}
-                    value={newProductVals.description}
-                  />
-                  <div className="field is-horizontal">
-                    <div className="field-label"></div>
-                    <div className="field-body">
-                      <SubmitBtn onSubmit={handleNewProdSubmit}>SUBMIT</SubmitBtn>
-                    </div>
-                  </div>
-                  <HelpText toggle={newProductVals.error} textSize="6" color="is-danger">
-                    {newProductVals.error}
-                  </HelpText>
-                  <HelpText toggle={newProductVals.success} textSize="6" color="is-success">
-                    New Product Added!
-                  </HelpText>
-                </Form>
-              </div>
-            </div>
-            <div className="tile is-child">
-              <div className="container form-container">
-                <Form title="UPDATE PRODUCT">
-                  <Dropdown
-                    name="name"
-                    label="Name:"
-                    onChange={handleExistingProdChange}
-                    value={existingProductVals.name}
-                    products={products}
-                  />
-                  { existingProductVals.deleteChecked || existingProductVals.name === "" ?
-                    <fieldset disabled>
-                      <InputField
-                        name="price"
-                        label="Price:"
-                        type="number"
-                        placeholder="price"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.price}
-                      />
-                      <InputField
-                        name="category"
-                        label="Category:"
-                        type="text"
-                        placeholder="category"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.category}
-                      />
-                      <InputField
-                        name="quantity"
-                        label="Quantity"
-                        type="number"
-                        placeholder="quantity"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.quantity}
-                      />
-                      <InputField
-                        name="image"
-                        label="Image:"
-                        type="url"
-                        placeholder="url"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.image}
-                      />
-                      <InputField
-                        name="description"
-                        label="Description:"
-                        type="text"
-                        placeholder="description"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.description}
-                      />
-                    </fieldset>
-                    :
-                    <>
-                      <InputField
-                        name="price"
-                        label="Price:"
-                        type="number"
-                        placeholder="price"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.price}
-                      />
-                      <InputField
-                        name="category"
-                        label="Category:"
-                        type="text"
-                        placeholder="category"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.category}
-                      />
-                      <InputField
-                        name="quantity"
-                        label="Quantity"
-                        type="number"
-                        placeholder="quantity"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.quantity}
-                      />
-                      <InputField
-                        name="image"
-                        label="Image:"
-                        type="url"
-                        placeholder="url"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.image}
-                      />
-                      <InputField
-                        name="description"
-                        label="Description:"
-                        type="text"
-                        placeholder="description"
-                        onChange={handleExistingProdChange}
-                        value={existingProductVals.description}
-                      />
-                    </>
-                  }
-                  <div className="field is-horizontal" id="update-controls">
-                    <div className="field-label"></div>
-                    <div className="field-body">
-                      <SubmitBtn onSubmit={handleExistingProdSubmit}>SUBMIT</SubmitBtn>
-                      <CheckBox 
-                        name="deleteChecked"
-                        label="Delete Product"
-                        onChange={handleCheckboxChange}
-                        isSelected={existingProductVals.deleteChecked}
-                      />
-                    </div>
-                  </div>
-                  <HelpText toggle={existingProductVals.error} textSize="6" color="is-danger">
-                    {existingProductVals.error}
-                  </HelpText>
-                  <HelpText toggle={existingProductVals.success} textSize="6" color="is-success">
-                    {existingProductVals.success}
-                  </HelpText>
-                </Form>
-              </div>
-            </div>
+        <div className="container">
+          <div className="title page-title has-text-centered is-2">
+            ADMIN DASHBOARD
           </div>
-          <div className="tile is-parent">
-            <div className="tile is-child">
-              <OrdersTable title="UNFILLED ORDERS" />
+          <div className="tile is-ancestor is-vertical">
+            <div className="tile is-parent">
+              <div className="tile is-child">
+                <div className="form-container">
+                  <Form title="ADD NEW PRODUCT">
+                    <InputField
+                      name="name"
+                      label="Name:"
+                      type="text"
+                      placeholder="name"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.name}
+                    />
+                    <InputField
+                      name="price"
+                      label="Price:"
+                      type="number"
+                      placeholder="price"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.price}
+                    />
+                    <InputField
+                      name="category"
+                      label="Category:"
+                      type="text"
+                      placeholder="category"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.category}
+                    />
+                    <InputField
+                      name="quantity"
+                      label="Quantity:"
+                      type="number"
+                      placeholder="quantity"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.quantity}
+                    />
+                    <InputField
+                      name="image"
+                      label="Image:"
+                      type="url"
+                      placeholder="url"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.image}
+                    />
+                    <InputField
+                      name="description"
+                      label="Description:"
+                      type="text"
+                      placeholder="description"
+                      onChange={handleNewProdChange}
+                      value={newProductVals.description}
+                    />
+                    <div className="field is-horizontal">
+                      <div className="field-label"></div>
+                      <div className="field-body">
+                        <SubmitBtn onSubmit={handleNewProdSubmit} />
+                      </div>
+                    </div>
+                    <HelpText
+                      toggle={newProductVals.error}
+                      textSize="6"
+                      color="is-danger"
+                    >
+                      {newProductVals.error}
+                    </HelpText>
+                    <HelpText
+                      toggle={newProductVals.success}
+                      textSize="6"
+                      color="is-success"
+                    >
+                      New Product Added!
+                    </HelpText>
+                  </Form>
+                </div>
+              </div>
+              <div className="tile is-child">
+                <div className="container form-container">
+                  <Form title="UPDATE PRODUCT">
+                    <Dropdown
+                      name="name"
+                      label="Name:"
+                      onChange={handleExistingProdChange}
+                      value={existingProductVals.name}
+                      products={products}
+                    />
+                    {existingProductVals.deleteChecked ||
+                    existingProductVals.name === "" ? (
+                      <fieldset disabled>
+                        <InputField
+                          name="price"
+                          label="Price:"
+                          type="number"
+                          placeholder="price"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.price}
+                        />
+                        <InputField
+                          name="category"
+                          label="Category:"
+                          type="text"
+                          placeholder="category"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.category}
+                        />
+                        <InputField
+                          name="quantity"
+                          label="Quantity:"
+                          type="number"
+                          placeholder="quantity"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.quantity}
+                        />
+                        <InputField
+                          name="image"
+                          label="Image:"
+                          type="url"
+                          placeholder="url"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.image}
+                        />
+                        <InputField
+                          name="description"
+                          label="Description:"
+                          type="text"
+                          placeholder="description"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.description}
+                        />
+                      </fieldset>
+                    ) : (
+                      <>
+                        <InputField
+                          name="price"
+                          label="Price:"
+                          type="number"
+                          placeholder="price"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.price}
+                        />
+                        <InputField
+                          name="category"
+                          label="Category:"
+                          type="text"
+                          placeholder="category"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.category}
+                        />
+                        <InputField
+                          name="quantity"
+                          label="Quantity:"
+                          type="number"
+                          placeholder="quantity"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.quantity}
+                        />
+                        <InputField
+                          name="image"
+                          label="Image:"
+                          type="url"
+                          placeholder="url"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.image}
+                        />
+                        <InputField
+                          name="description"
+                          label="Description:"
+                          type="text"
+                          placeholder="description"
+                          onChange={handleExistingProdChange}
+                          value={existingProductVals.description}
+                        />
+                      </>
+                    )}
+                    <div className="field is-horizontal" id="update-controls">
+                      <div className="field-label"></div>
+                      <div className="field-body">
+                        <SubmitBtn onSubmit={handleExistingProdSubmit} />
+                        <CheckBox
+                          name="deleteChecked"
+                          label="Delete Product"
+                          onChange={handleCheckboxChange}
+                          isSelected={existingProductVals.deleteChecked}
+                        />
+                      </div>
+                    </div>
+                    <HelpText
+                      toggle={existingProductVals.error}
+                      textSize="6"
+                      color="is-danger"
+                    >
+                      {existingProductVals.error}
+                    </HelpText>
+                    <HelpText
+                      toggle={existingProductVals.success}
+                      textSize="6"
+                      color="is-success"
+                    >
+                      {existingProductVals.success}
+                    </HelpText>
+                  </Form>
+                </div>
+              </div>
+            </div>
+            <div className="tile is-parent">
+              <div className="tile is-child tile-overflow">
+                <OrdersTable
+                  title="UNFILLED ORDERS"
+                  orders={orders}
+                  onClick={updateOrderStatus}
+                />
+              </div>
             </div>
           </div>
         </div>

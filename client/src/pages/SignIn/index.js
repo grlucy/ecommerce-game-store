@@ -10,8 +10,8 @@ import LinkBtn from "../../components/LinkBtn";
 
 function SignIn() {
   const [values, setValues] = useState({
-    email: "bjf216@gmail.com",
-    password: "hotdog1",
+    email: "",
+    password: "",
     error: "",
     loading: false,
     redirectToReferrer: false,
@@ -30,37 +30,39 @@ function SignIn() {
       email: values.email,
       password: values.password,
     })
-    .then((res) => {
-      if (res.error) {
-        setValues({ ...values, error: res.error, loading: false });
-      } else {
-        authenticate(res.data, () => {
-          setValues({
-            ...values,
-            redirectToReferrer: true,
-          });  
+      .then((res) => {
+        if (res.error) {
+          setValues({ ...values, error: res.error, loading: false });
+        } else {
+          authenticate(res.data, () => {
+            setValues({
+              ...values,
+              redirectToReferrer: true,
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        setValues({
+          ...values,
+          error: err.response.data.error,
+          success: false,
         });
-      }
-    })
-    .catch((err) => {
-      setValues({
-        ...values,
-        error: err.response.data.error,
-        success: false
       });
-    });
   };
 
   const redirectUser = () => {
-    if (values.redirectToReferrer) {  //redirect user appropriately after login
+    if (values.redirectToReferrer) {
+      //redirect user appropriately after login
       if (user && user.role === "Admin") {
-        return <Redirect to="/admin" />
+        return <Redirect to="/admin" />;
       } else {
-        return <Redirect to="/account" />
+        return <Redirect to="/account" />;
       }
     }
-    if (isAuthenticated()) {  //this catches authenticated non-admin users redirected here from /admin route
-      return <Redirect to="/" />
+    if (isAuthenticated()) {
+      //this catches authenticated non-admin users redirected here from /admin route
+      return <Redirect to="/" />;
     }
   };
 
