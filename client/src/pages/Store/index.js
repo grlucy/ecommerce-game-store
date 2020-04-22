@@ -11,14 +11,15 @@ function Store() {
   const [ selectedCat, setSelectedCat ] = useState("None");
   const [ stockedChecked, setStockedChecked ] = useState(false);
   const [ searchTerm, setSearchTerm ] = useState("");
+  const [ pendingSearch, setPendingSearch ] = useState("");
 
   const handleSearchChange = (event) => {
-    console.log("in handleSearchChange");
-    setSearchTerm(event.target.value);
+    setPendingSearch(event.target.value);
   }
 
   const handleSearchSubmit = (event) => {
-    console.log("in handleSearchSubmit");
+    event.preventDefault();
+    setSearchTerm(pendingSearch);
   }
 
   const handleCategoryChange = (event) => {
@@ -57,6 +58,18 @@ function Store() {
     });
   }
 
+  const getSearchResults = () => {
+    let term = searchTerm.toLowerCase();
+    let matches = products.filter( product => {
+      return ( 
+        product.name.toLowerCase().indexOf(term) !== -1 ||
+        product.category.toLowerCase().indexOf(term) !== -1 ||
+        product.description.toLowerCase().indexOf(term) !== -1
+      );
+    });
+    return matches;
+  }
+
   const productShouldRender = (product) => {
     let stockOK = false;
     let catOK = false;
@@ -79,7 +92,7 @@ function Store() {
         <div className="columns">
           <div className="column is-one-quarter">
             <StoreSearch
-              search={searchTerm}
+              search={pendingSearch}
               onSearchChange={handleSearchChange}
               onSearchSubmit={handleSearchSubmit}
               categories={categories}
@@ -90,7 +103,7 @@ function Store() {
             />
           </div>
           <div className="column is-three-quarters">
-            {products.map((product) => {
+            {getSearchResults().map((product) => {
               if (productShouldRender(product)) {
                 return (
                   <StoreItem product={product} key={product._id} />
