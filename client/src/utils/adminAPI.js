@@ -17,6 +17,10 @@ export default {
     return axios.get(`api/product/${productId}`);
   },
 
+  getCategories: function() {
+    return axios.get("api/products/categories");
+  },
+
   updateProduct: function(userId, token, productId, productData) {
     return axios.put(`api/product/${productId}/${userId}`, productData, {
       headers: {
