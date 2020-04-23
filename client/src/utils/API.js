@@ -31,5 +31,13 @@ export default {
         Authorization: `Bearer ${token}`,
       }
     });
+  },
+
+  processPayment: function(userId, token, paymentData) {
+    return axios.post(`api/braintree/payment/${userId}`, paymentData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
   }
 };

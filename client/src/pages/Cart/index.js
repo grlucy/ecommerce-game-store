@@ -32,6 +32,11 @@ function Cart() {
     updateCart(updatedItems);
   }
 
+  const emptyCart = () => {
+    setItems([]);
+    updateCart([]);
+  }
+
   const renderEmpty = () => {
     return <div>Hey howdy hey!</div>;
   }
@@ -60,7 +65,7 @@ function Cart() {
             { items.length === 0 ? renderEmpty() : renderItems() }
           </div>
           <div className="column is-two-fifths">
-            <Checkout products={items}/>
+            <Checkout products={items} emptyCart={emptyCart}/>
           </div>
         </div>
       </section>

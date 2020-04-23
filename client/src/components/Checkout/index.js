@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import DropIn from "braintree-web-drop-in-react";
 
-function Checkout({ products }) {
+function Checkout({ products, emptyCart }) {
 
   const [ data, setData ] = useState({
     success: false,
@@ -44,7 +44,8 @@ function Checkout({ products }) {
     <div>{showDropIn()}</div>
     ) : (
       <Link to="/signin">
-        <button className="button is-danger">SIGN IN TO CHECKOUT</button>
+        <button className="button is-danger is-fullwidth">SIGN IN TO CHECKOUT</button>
+        <h2 className="title is-3">Total: ${getTotal().toFixed(2)}</h2>
       </Link>
     );
   }
@@ -55,14 +56,27 @@ function Checkout({ products }) {
     let nonce;
     let getNonce = data.instance.requestPaymentMethod()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       nonce = res.nonce;
       // once you have nonce (card type, card number) send nonce as "paymentMethodNonce"
       // and total to charge
-      console.log("send nonce and total to process: ", nonce, getTotal().toFixed(2));
+      // console.log("send nonce and total to process: ", nonce, getTotal().toFixed(2));
+      const paymentData = {
+        paymentMethodNonce: nonce,
+        amount: getTotal()
+      }
+      API.processPayment(userId, token, paymentData)
+      .then((res) => {
+        setData({ ...data, success: res.data.success});
+        emptyCart();
+        //also need to create order
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     })
     .catch((err) => {
-      console.log("dropin error: " , err);
+      // console.log("dropin error: " , err);
       setData({ ...data, error: err.message });
     })
   }
@@ -76,7 +90,8 @@ function Checkout({ products }) {
               options={{ authorization: data.clientToken }}
               onInstance={instance => (data.instance = instance)}
             />
-            <button className="button is-success" onClick={buy}>MAKE PAYMENT</button>
+            <h2 className="title is-3">Total: <span className="has-text-danger">${getTotal().toFixed(2)}</span></h2>
+            <button className="button is-success is-fullwidth" onClick={buy}>MAKE PAYMENT</button>
           </div>
         ) : null}
       </div>
@@ -91,9 +106,18 @@ function Checkout({ products }) {
     );
   }
 
+  const showSuccess = (success) => {
+    return (
+      <div className="notification is-success is-light" style={{display: success ? "" : "none"}}>
+        Payment received. Thank you!
+      </div>
+    );
+  }
+
+
   return (
     <div>
-      <h2 className="title is-3">Total: {getTotal().toFixed(2)}</h2>
+      {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
     </div>
