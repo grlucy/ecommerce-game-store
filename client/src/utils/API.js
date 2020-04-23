@@ -23,5 +23,13 @@ export default {
 
   getCategories: function() {
     return axios.get("api/products/categories");
+  },
+
+  getBraintreeClientToken: function(userId, token) {
+    return axios.get(`api/braintree/getToken/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
   }
 };

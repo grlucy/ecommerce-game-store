@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCart, updateCart } from "../../utils/cartHelpers";
 import CartItem from "../../components/CartItem";
+import Checkout from "../../components/Checkout";
 
 function Cart() {
 
@@ -59,7 +60,7 @@ function Cart() {
             { items.length === 0 ? renderEmpty() : renderItems() }
           </div>
           <div className="column is-two-fifths">
-            {/* render braintree checkout stuff here */}
+            <Checkout products={items}/>
           </div>
         </div>
       </section>
