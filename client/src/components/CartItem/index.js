@@ -24,30 +24,30 @@ function CartItem(props) {
                   <div className="level-item">
                     <div className="field has-addons">
                       <div className="control">
-                        <button className="button is-static">
+                        <button className="button is-small is-static">
                           Qty:
                         </button>
                       </div>
                       <div className="control">
                         {count > 0 ?
                           <input
-                            className="input is-radiusless quantity-field"
+                            className="input is-radiusless is-small quantity-field"
                             type="number"
-                            onChange={onCountChange}
+                            onChange={onCountChange(_id)}
                             value={count}
                           />
                           :
                           <input
                             className="input is-radiusless is-small quantity-field"
                             type="number"
-                            onChange={onCountChange}
+                            onChange={onCountChange(_id)}
                             value={count}
                             disabled
                           />
                         }
                       </div>
                       <div className="control">
-                        <button className="button is-danger" onClick={removeFromCart(_id)}>
+                        <button className="button is-danger is-small" onClick={removeFromCart(_id)}>
                           <span className="icon">
                             <i className="fas fa-trash-alt"></i>
                           </span>

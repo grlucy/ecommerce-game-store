@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCart } from "../../utils/cartHelpers";
+import { getCart, updateCart } from "../../utils/cartHelpers";
 import CartItem from "../../components/CartItem";
 
 function Cart() {
@@ -10,12 +10,25 @@ function Cart() {
     setItems(getCart());
   }, []);
 
-  const handleCountChange = () => {
-    console.log("handling that count change");
+  const handleCountChange = (id) => (event) => {
+    if (event.target.value >= 1) {
+      const updatedItems = items.map((item) => {
+        if (item._id === id) {
+          item.count = event.target.value;
+        }
+        return item;
+      });
+      setItems(updatedItems);
+      updateCart(updatedItems);
+    }
   }
 
-  const removeItemFromCart = (item) => {
-    console.log("removing that there item");
+  const removeItemFromCart = (id) => (event) => {
+    const updatedItems = items.filter((item) => {
+      return item._id !== id;
+    });
+    setItems(updatedItems);
+    updateCart(updatedItems);
   }
 
   const renderEmpty = () => {

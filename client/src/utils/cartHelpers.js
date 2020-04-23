@@ -38,3 +38,9 @@ export const getCart = () => {
   }
   return [];
 };
+
+export const updateCart = (items) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("cart", JSON.stringify(items));
+  }
+}
