@@ -36,7 +36,6 @@ function Store() {
       if(res.error) {
         console.log(res.error);
       } else {
-        console.log(res.data);
         setCategories(res.data.map((category, index) => {
           return {
             id: index,
