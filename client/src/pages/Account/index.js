@@ -54,6 +54,7 @@ function Account() {
           <div className="column">
             <div className="theme-border">
               <h4 className="title is-4">Order History</h4>
+              {orders.length === 0 ? <p>No orders yet</p> : null}
               {orders.map((order) => (
                 <div key={order._id}>
                   <hr />
