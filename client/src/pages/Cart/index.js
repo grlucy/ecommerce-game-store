@@ -5,8 +5,7 @@ import CartItem from "../../components/CartItem";
 import Checkout from "../../components/Checkout";
 
 function Cart() {
-
-  const [ items, setItems ] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     setItems(getCart());
@@ -23,7 +22,7 @@ function Cart() {
       setItems(updatedItems);
       updateCart(updatedItems);
     }
-  }
+  };
 
   const removeItemFromCart = (id) => (event) => {
     const updatedItems = items.filter((item) => {
@@ -31,21 +30,25 @@ function Cart() {
     });
     setItems(updatedItems);
     updateCart(updatedItems);
-  }
+  };
 
   const emptyCart = () => {
     setItems([]);
     updateCart([]);
-  }
+  };
 
   const renderEmpty = () => {
     return (
       <section className="section">
-        <h2 className="title is-3">Your Cart is Empty!</h2>
-        <Link to="/store"><button className="button is-danger is-medium">Continue Shopping</button></Link>
+        <h2 className="title is-3">Uh Oh, Your Cart is Empty!</h2>
+        <Link to="/store">
+          <button className="button is-danger is-medium">
+            Continue Shopping
+          </button>
+        </Link>
       </section>
     );
-  }
+  };
 
   const renderItems = () => {
     return items.map((item) => {
@@ -58,24 +61,22 @@ function Cart() {
         />
       );
     });
-  }
+  };
 
   return (
-    <>
-      <div className="title page-title has-text-centered is-2">
-        CART
-      </div>
+    <div className="container">
+      <div className="title page-title has-text-centered is-2">CART</div>
       <section className="section">
         <div className="columns">
           <div className="column is-three-fifths">
-            { items.length === 0 ? renderEmpty() : renderItems() }
+            {items.length === 0 ? renderEmpty() : renderItems()}
           </div>
           <div className="column is-two-fifths">
-            <Checkout products={items} emptyCart={emptyCart}/>
+            <Checkout products={items} emptyCart={emptyCart} />
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

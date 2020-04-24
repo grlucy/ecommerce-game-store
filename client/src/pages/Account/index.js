@@ -26,6 +26,7 @@ function Account() {
 
   useEffect(() => {
     loadOrderHistory();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -59,11 +60,11 @@ function Account() {
                 <div key={order._id}>
                   <hr />
                   <div className="table-container">
-                    <table className="table is-fullwidth">
+                    <table className="table is-fullwidth col-layout">
                       <thead>
                         <tr>
-                          <th>Order #</th>
-                          <th>{order._id}</th>
+                          <th className="col-width">Order #</th>
+                          <th>{order.transaction_id}</th>
                         </tr>
                       </thead>
                       <tbody>
