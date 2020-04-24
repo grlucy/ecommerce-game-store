@@ -3,12 +3,15 @@ import { isAuthenticated } from "../../utils/auth";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import DropIn from "braintree-web-drop-in-react";
+import AuthInputField from "../../components/AuthForm/AuthInputField";
+import "./style.css";
 
 function Checkout({ products, emptyCart }) {
 
   const [ data, setData ] = useState({
     loading: false,
     success: false,
+    pickup: "",
     clientToken: null,
     error: "",
     instance: {}
@@ -17,6 +20,10 @@ function Checkout({ products, emptyCart }) {
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
+  const handlePickupChange = (name) => (event) => {
+    setData({ ...data, pickup: event.target.value });
+  }
+  
   const getToken = (userId, token) => {
     API.getBraintreeClientToken(userId, token)
     .then((res) => {
@@ -57,19 +64,19 @@ function Checkout({ products, emptyCart }) {
     let nonce;
     let getNonce = data.instance.requestPaymentMethod()
     .then((res) => {
-      // console.log(res);
       nonce = res.nonce;
       // once you have nonce (card type, card number) send nonce as "paymentMethodNonce"
       // and total to charge
-      // console.log("send nonce and total to process: ", nonce, getTotal().toFixed(2));
       const paymentData = {
         paymentMethodNonce: nonce,
-        amount: getTotal()
+        amount: getTotal().toFixed(2)
       }
       API.processPayment(userId, token, paymentData)
       .then((res) => {
+        console.log(res);
         const orderData = {
           products: products,
+          pickup: data.pickup,
           transaction_id: res.data.transaction.id,
           amount: res.data.transaction.amount
         };
@@ -107,8 +114,21 @@ function Checkout({ products, emptyCart }) {
               }}
               onInstance={instance => (data.instance = instance)}
             />
+            <div id="pickup-form"> 
+            <form>
+              <AuthInputField
+                name="pickup"
+                label="Enter Desired Pickup Time"
+                type="text"
+                placeholder="ex. 4/25 @ 12:00pm"
+                onChange={handlePickupChange}
+                value={data.pickup}
+                icon="fas fa-car"
+              />
+            </form>
+            </div>
             <h2 className="title is-3">Total: <span className="has-text-danger">${getTotal().toFixed(2)}</span></h2>
-            { products.length > 0 ? (
+            { products.length > 0 && data.pickup ? (
                 <button className="button is-success is-fullwidth" onClick={buy}>MAKE PAYMENT</button>
               ) : (
                 <button className="button is-success is-fullwidth" disabled>MAKE PAYMENT</button>
