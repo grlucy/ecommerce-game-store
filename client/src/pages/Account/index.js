@@ -60,10 +60,10 @@ function Account() {
                 <div key={order._id}>
                   <hr />
                   <div className="table-container">
-                    <table className="table is-fullwidth">
+                    <table className="table is-fullwidth col-layout">
                       <thead>
                         <tr>
-                          <th>Order #</th>
+                          <th className="col-width">Order #</th>
                           <th>{order._id}</th>
                         </tr>
                       </thead>

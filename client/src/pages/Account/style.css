@@ -2,3 +2,9 @@
   padding: 36px;
   border: 1px solid #dbdbdb;
 }
+.col-layout {
+  table-layout: fixed;
+}
+.col-width {
+  width: 105px;
+}
