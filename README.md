@@ -25,7 +25,7 @@ A website for a local game store that enables online transactions and curbside p
 |     React     |               JavaScript               |      Postman      |    Git     | AWS S3 Buckets |
 |     Axios     |                MongoDB                 |      Robo 3T      |   Heroku   |                |
 | React Router  |                Mongoose                | Braintree Sandbox |    mLab    |                |
-|      CSS      |                Express                 |                   |            |                |
+|      CSS      |                Express                 |  PayPal Sandbox   |            |                |
 |     Bulma     |                Node.js                 |                   |            |                |
 |     HTML      |     Password hashing: crypto, uuid     |                   |            |                |
 | Formspree API |           Express-validator            |                   |            |                |
@@ -50,7 +50,7 @@ A website for a local game store that enables online transactions and curbside p
 
 ## Testing
 
-Users can test ecommerce transactions on the site using [Braintree Sandbox's test credit cards for Node.js](https://developers.braintreepayments.com/guides/credit-cards/testing-go-live/node).
+Users can test ecommerce transactions on the site using [Braintree Sandbox's test credit cards for Node.js](https://developers.braintreepayments.com/guides/credit-cards/testing-go-live/node) or by using a PayPal sandbox account.
 
 ## Credits
 

@@ -96,7 +96,6 @@ function Checkout({ products, emptyCart }) {
           });
       })
       .catch((err) => {
-        // console.log("dropin error: " , err);
         setData({ ...data, error: err.message });
       });
   };
