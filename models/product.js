@@ -24,6 +24,7 @@ const productSchema = new Schema(
       type: Number,
       trim: true,
       required: true,
+      min: [0, "insufficient stock"],
     },
     image: {
       type: String,

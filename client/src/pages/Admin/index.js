@@ -128,18 +128,6 @@ function Admin() {
             error: "",
             success: true,
           });
-          setTimeout(() => {
-            setNewProductVals({
-              name: "",
-              price: "",
-              category: "",
-              quantity: "",
-              image: "",
-              description: "",
-              error: "",
-              success: false,
-            });
-          }, 1500);
           loadProducts();
         }
       })
@@ -219,19 +207,6 @@ function Admin() {
             error: "",
             success: "Product Deleted!",
           });
-          setTimeout(() => {
-            setExistingProductVals({
-              name: "",
-              price: "",
-              category: "",
-              quantity: "",
-              image: "",
-              description: "",
-              deleteChecked: existingProductVals.deleteChecked,
-              error: "",
-              success: false,
-            });
-          }, 1500);
           loadProducts();
         }
       })
@@ -281,19 +256,6 @@ function Admin() {
             error: "",
             success: "Product Updated!",
           });
-          setTimeout(() => {
-            setExistingProductVals({
-              name: "",
-              price: "",
-              category: "",
-              quantity: "",
-              image: "",
-              description: "",
-              deleteChecked: existingProductVals.deleteChecked,
-              error: "",
-              success: false,
-            });
-          }, 1500);
           loadProducts();
         }
       })
@@ -338,7 +300,7 @@ function Admin() {
           <div className="tile is-ancestor is-vertical">
             <div className="tile is-parent">
               <div className="tile is-child">
-                <div className="form-container">
+                <div className="form-container" onBlur={() => setNewProductVals({ ...newProductVals, success: false })}>
                   <Form title="ADD NEW PRODUCT">
                     <InputField
                       name="name"
@@ -414,7 +376,7 @@ function Admin() {
                 </div>
               </div>
               <div className="tile is-child">
-                <div className="container form-container">
+                <div className="container form-container" onBlur={() => setExistingProductVals({ ...existingProductVals, success: false })}>
                   <Form title="UPDATE PRODUCT">
                     <Dropdown
                       name="name"

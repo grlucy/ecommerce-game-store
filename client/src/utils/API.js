@@ -23,5 +23,29 @@ export default {
 
   getCategories: function() {
     return axios.get("api/products/categories");
+  },
+
+  getBraintreeClientToken: function(userId, token) {
+    return axios.get(`api/braintree/getToken/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  processPayment: function(userId, token, paymentData) {
+    return axios.post(`api/braintree/payment/${userId}`, paymentData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  createOrder: function(userId, token, orderData) {
+    return axios.post(`api/order/create/${userId}`, orderData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 };

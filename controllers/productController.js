@@ -125,11 +125,11 @@ exports.listCategories = (req, res) => {
 };
 
 exports.decreaseQuantity = (req, res, next) => {
-  let bulkOps = req.body.order.products.map((item) => {
+  let bulkOps = req.body.products.map((item) => {
     return {
       updateOne: {
         filter: { _id: item._id },
-        update: { $inc: { quantity: -item.count, sold: +item.count } },
+        update: { $inc: { quantity: -item.count, numberSold: +item.count } },
       },
     };
   });

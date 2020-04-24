@@ -1,0 +1,35 @@
+.cart-img {
+  height: 10vh;
+  width: 10vh;
+  object-fit: cover;
+}
+
+.quantity-field {
+  width: 52px;
+}
+
+.quantity-label {
+  margin-right: 8px;
+}
+
+.cart-item {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dbdbdb;
+  margin: 0, 2vh;
+}
+
+.tile.is-ancestor {
+  margin-bottom: 2vh;
+  margin-top: 0;
+}
+
+.tile.is-ancestor:last-child {
+  margin-bottom: 2vh;
+}
+
+.field.has-addons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}

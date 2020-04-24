@@ -22,16 +22,16 @@ exports.read = (req, res) => {
 exports.addOrderToUserHistory = (req, res, next) => {
   let history = [];
 
-  req.body.order.products.forEach((item) => {
+  req.body.products.forEach((item) => {
     history.push({
       _id: item._id,
       name: item.name,
       description: item.description,
       category: item.category,
       quantity: item.count,
-      transaction_id: req.body.order.transaction_id,
-      amount: req.body.order.amount,
-      pickup: req.body.order.pickup,
+      transaction_id: req.body.transaction_id,
+      amount: req.body.amount,
+      // pickup: req.body.order.pickup,
     });
   });
 

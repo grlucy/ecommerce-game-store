@@ -53,7 +53,7 @@ function StoreItem(props) {
               <p className="subtitle is-size-6"><strong>Category: </strong>{category}</p>
               <div className="level">
                 <div className="level-left">
-                  <div className="level-item"><strong>Price: <span className="has-text-danger is-size-4">${price}</span></strong></div>
+                  <div className="level-item"><strong>Price: <span className="has-text-danger is-size-4">${price.toFixed(2)}</span></strong></div>
                 </div>
                 <div className="level-right">
                   <div className="level-item">
