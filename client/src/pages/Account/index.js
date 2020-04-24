@@ -64,7 +64,7 @@ function Account() {
                       <thead>
                         <tr>
                           <th className="col-width">Order #</th>
-                          <th>{order._id}</th>
+                          <th>{order.transaction_id}</th>
                         </tr>
                       </thead>
                       <tbody>

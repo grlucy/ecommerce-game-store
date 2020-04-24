@@ -5,7 +5,7 @@ function OrdersTable(props) {
   return (
     <>
       <h3 className="title is-4 has-text-centered">{props.title}</h3>
-      <table className="table is-striped is-narrow orders-table">
+      <table className="table is-striped is-narrow is-fullwidth orders-table">
         <thead>
           <tr>
             <th>Order #</th>
@@ -19,7 +19,7 @@ function OrdersTable(props) {
         <tbody>
           {props.orders.map((order) => (
             <tr key={order._id}>
-              <td>{order._id}</td>
+              <td>{order.transaction_id}</td>
               <td>{order.user.name}</td>
               <td>{order.user.email}</td>
               <td>
