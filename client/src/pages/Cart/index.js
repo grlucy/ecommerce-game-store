@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getCart, updateCart } from "../../utils/cartHelpers";
 import CartItem from "../../components/CartItem";
 import Checkout from "../../components/Checkout";
@@ -38,7 +39,12 @@ function Cart() {
   }
 
   const renderEmpty = () => {
-    return <div>Hey howdy hey!</div>;
+    return (
+      <section className="section">
+        <h2 className="title is-3">Uh Oh, Your Cart is Empty!</h2>
+        <Link to="/store"><button className="button is-danger is-medium">Continue Shopping</button></Link>
+      </section>
+    );
   }
 
   const renderItems = () => {
