@@ -7,6 +7,7 @@ import DropIn from "braintree-web-drop-in-react";
 function Checkout({ products, emptyCart }) {
 
   const [ data, setData ] = useState({
+    loading: false,
     success: false,
     clientToken: null,
     error: "",
@@ -45,12 +46,12 @@ function Checkout({ products, emptyCart }) {
     ) : (
       <Link to="/signin">
         <button className="button is-danger is-fullwidth">SIGN IN TO CHECKOUT</button>
-        <h2 className="title is-3">Total: ${getTotal().toFixed(2)}</h2>
       </Link>
     );
   }
 
   const buy = () => {
+    setData({ ...data, loading: true });
     // send the nonce to your server
     // data.instance.requestPaymentMethod returns nonce
     let nonce;
@@ -67,12 +68,23 @@ function Checkout({ products, emptyCart }) {
       }
       API.processPayment(userId, token, paymentData)
       .then((res) => {
-        setData({ ...data, success: res.data.success});
-        emptyCart();
-        //also need to create order
+        const orderData = {
+          products: products,
+          transaction_id: res.data.transaction.id,
+          amount: res.data.transaction.amount
+        };
+        API.createOrder(userId, token, orderData)
+        .then((res) => {
+          setData({ ...data, success: true, loading: false});
+          emptyCart();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       })
       .catch((err) => {
         console.log(err);
+        setData({ ...data, loading: false });
       });
     })
     .catch((err) => {
@@ -84,16 +96,29 @@ function Checkout({ products, emptyCart }) {
   const showDropIn = () => {
     return (
       <div onBlur={() => setData({ ...data, error: "" })}>
-        {data.clientToken !== null && products.length > 0 ? (
+        {data.clientToken !== null ? (
           <div>
             <DropIn
-              options={{ authorization: data.clientToken }}
+              options={{
+                authorization: data.clientToken,
+                paypal: {
+                  flow: "vault"
+                }
+              }}
               onInstance={instance => (data.instance = instance)}
             />
             <h2 className="title is-3">Total: <span className="has-text-danger">${getTotal().toFixed(2)}</span></h2>
-            <button className="button is-success is-fullwidth" onClick={buy}>MAKE PAYMENT</button>
+            { products.length > 0 ? (
+                <button className="button is-success is-fullwidth" onClick={buy}>MAKE PAYMENT</button>
+              ) : (
+                <button className="button is-success is-fullwidth" disabled>MAKE PAYMENT</button>
+              )
+
+            }
           </div>
-        ) : null}
+        ) : (
+          <h2 className="title is-3">Total: <span className="has-text-danger">${getTotal().toFixed(2)}</span></h2>
+        )}
       </div>
     );
   }
@@ -114,9 +139,12 @@ function Checkout({ products, emptyCart }) {
     );
   }
 
+  const showLoading = (loading) => loading && <h2 className="title is-3">Loading...</h2>
+
 
   return (
     <div>
+      {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
