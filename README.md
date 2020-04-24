@@ -48,6 +48,10 @@ A website for a local game store that enables online transactions and curbside p
 - Shipping option in addition to curbside pickup
 - Blog page
 
+## Testing
+
+Users can test ecommerce transactions on the site using [Braintree Sandbox's test credit cards for Node.js](https://developers.braintreepayments.com/guides/credit-cards/testing-go-live/node).
+
 ## Credits
 
 Stock images:

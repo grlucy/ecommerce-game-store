@@ -80,6 +80,7 @@ function Admin() {
   useEffect(() => {
     loadProducts();
     loadOpenOrders();
+    // eslint-disable-next-line
   }, []);
 
   const handleNewProdChange = (name) => (event) => {
@@ -300,7 +301,12 @@ function Admin() {
           <div className="tile is-ancestor is-vertical">
             <div className="tile is-parent">
               <div className="tile is-child">
-                <div className="form-container" onBlur={() => setNewProductVals({ ...newProductVals, success: false })}>
+                <div
+                  className="form-container"
+                  onBlur={() =>
+                    setNewProductVals({ ...newProductVals, success: false })
+                  }
+                >
                   <Form title="ADD NEW PRODUCT">
                     <InputField
                       name="name"
@@ -376,7 +382,15 @@ function Admin() {
                 </div>
               </div>
               <div className="tile is-child">
-                <div className="container form-container" onBlur={() => setExistingProductVals({ ...existingProductVals, success: false })}>
+                <div
+                  className="container form-container"
+                  onBlur={() =>
+                    setExistingProductVals({
+                      ...existingProductVals,
+                      success: false,
+                    })
+                  }
+                >
                   <Form title="UPDATE PRODUCT">
                     <Dropdown
                       name="name"

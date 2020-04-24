@@ -26,6 +26,7 @@ function Account() {
 
   useEffect(() => {
     loadOrderHistory();
+    // eslint-disable-next-line
   }, []);
 
   return (
