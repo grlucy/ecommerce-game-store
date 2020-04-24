@@ -15,3 +15,18 @@ body {
 .submit-btn {
   margin: auto;
 }
+
+button.is-danger {
+  background-color: #ff0000 !important;
+}
+.button.is-danger.is-outlined {
+  background-color: transparent !important;
+  border-color: #ff0000 !important;
+  color: #ff0000 !important;
+}
+.has-text-danger {
+  color: #ff0000 !important;
+}
+.help.is-danger {
+  color: #ff0000 !important;
+}
