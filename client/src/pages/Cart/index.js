@@ -40,7 +40,7 @@ function Cart() {
   const renderEmpty = () => {
     return (
       <section className="section">
-        <h2 className="title is-3">Uh Oh, Your Cart is Empty!</h2>
+        <h2 className="title is-3">Your Cart is Empty!</h2>
         <Link to="/store">
           <button className="button is-danger is-medium">
             Continue Shopping
