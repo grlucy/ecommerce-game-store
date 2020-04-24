@@ -85,14 +85,14 @@ function Account() {
                           <th>Products</th>
                           <td>
                             {order.products.map((product) => (
-                              <>
+                              <div key={product.name}>
                                 <p className="has-text-weight-bold">
                                   {product.name}
                                 </p>
                                 <p>Price: ${product.price}</p>
                                 <p>Quantity: {product.count}</p>
                                 <br />
-                              </>
+                              </div>
                             ))}
                           </td>
                         </tr>
