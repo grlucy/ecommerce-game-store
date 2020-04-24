@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-import adminAPI from "../../utils/adminAPI";
 import StoreSearch from "../../components/StoreSearch";
 import StoreItem from "../../components/StoreItem";
 
@@ -105,6 +104,8 @@ function Store() {
             {getSearchResults().map((product) => {
               if (productShouldRender(product)) {
                 return <StoreItem product={product} key={product._id} />;
+              } else {
+                return null;
               }
             })}
           </div>
