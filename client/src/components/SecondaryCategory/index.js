@@ -7,7 +7,11 @@ function SecondaryCategory(props) {
   return (
     <>
       <div className={props.classes}>
-        <img className="align-bot secondary-img" src={props.image} />
+        <img
+          className="align-bot secondary-img"
+          src={props.image}
+          alt={props.headerText}
+        />
         <div className="secondary-overlay level is-mobile">
           <div className="level-item has-text-centered">
             <div className="line-space">

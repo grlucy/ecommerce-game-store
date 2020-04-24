@@ -3,7 +3,6 @@ import API from "../../utils/API";
 import adminAPI from "../../utils/adminAPI";
 import { isAuthenticated } from "../../utils/auth";
 import "./style.css";
-import { TransactionLineItem } from "braintree";
 import Form from "../../components/Form";
 import InputField from "../../components/Form/InputField";
 import Dropdown from "../../components/Form/Dropdown";
@@ -354,7 +353,9 @@ function Admin() {
                     <div className="field is-horizontal">
                       <div className="field-label"></div>
                       <div className="field-body">
-                        <SubmitBtn onSubmit={handleNewProdSubmit}>SUBMIT</SubmitBtn>
+                        <SubmitBtn onSubmit={handleNewProdSubmit}>
+                          SUBMIT
+                        </SubmitBtn>
                       </div>
                     </div>
                     <HelpText
@@ -475,7 +476,9 @@ function Admin() {
                     <div className="field is-horizontal" id="update-controls">
                       <div className="field-label"></div>
                       <div className="field-body">
-                        <SubmitBtn onSubmit={handleExistingProdSubmit}>SUBMIT</SubmitBtn>
+                        <SubmitBtn onSubmit={handleExistingProdSubmit}>
+                          SUBMIT
+                        </SubmitBtn>
                         <CheckBox
                           name="deleteChecked"
                           label="Delete Product"

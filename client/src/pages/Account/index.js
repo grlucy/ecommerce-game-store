@@ -54,6 +54,7 @@ function Account() {
           <div className="column">
             <div className="theme-border">
               <h4 className="title is-4">Order History</h4>
+              {orders.length === 0 ? <p>No orders yet</p> : null}
               {orders.map((order) => (
                 <div key={order._id}>
                   <hr />
@@ -84,14 +85,14 @@ function Account() {
                           <th>Products</th>
                           <td>
                             {order.products.map((product) => (
-                              <>
+                              <div key={product.name}>
                                 <p className="has-text-weight-bold">
                                   {product.name}
                                 </p>
                                 <p>Price: ${product.price}</p>
                                 <p>Quantity: {product.count}</p>
                                 <br />
-                              </>
+                              </div>
                             ))}
                           </td>
                         </tr>

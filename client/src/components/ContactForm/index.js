@@ -39,7 +39,7 @@ function ContactForm() {
           <label className="label">Message:</label>
           <div className="control">
             <textarea
-              class="textarea is-radiusless"
+              className="textarea is-radiusless"
               name="message"
               placeholder="Message"
               rows="2"
