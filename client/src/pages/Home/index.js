@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import API from "../../utils/API";
-
+import React from "react";
 import FeaturedCategory from "../../components/FeaturedCategory";
 import SecondaryCategory from "../../components/SecondaryCategory";
 import News from "../../components/News";
