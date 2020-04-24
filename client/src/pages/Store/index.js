@@ -33,14 +33,6 @@ function Store() {
       if (res.error) {
         console.log(res.error);
       } else {
-<<<<<<< HEAD
-        setCategories(res.data.map((category, index) => {
-          return {
-            id: index,
-            name: category
-          }
-        }));
-=======
         setCategories(
           res.data.map((category, index) => {
             return {
@@ -49,7 +41,6 @@ function Store() {
             };
           })
         );
->>>>>>> master
       }
     });
   };
