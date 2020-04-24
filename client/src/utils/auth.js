@@ -5,23 +5,21 @@ export const authenticate = (data, next) => {
     localStorage.setItem("jwt", JSON.stringify(data));
     next();
   }
-}
+};
 
 export const signout = (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
     next();
-    return (
-      API.signOut()
+    return API.signOut()
       .then((res) => {
-        console.log("sign out", res.data)
+        console.log(res.data.message);
       })
       .catch((err) => {
         console.log(err.response.data.error);
-      })
-    );
+      });
   }
-}
+};
 
 export const isAuthenticated = () => {
   if (typeof window == "undefined") {
@@ -32,4 +30,4 @@ export const isAuthenticated = () => {
   } else {
     return false;
   }
-}
+};

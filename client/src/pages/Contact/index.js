@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import API from "../../utils/API";
-
+import React from "react";
 import ContactSection from "../../components/ContactSection";
 import Map from "../../components/Map";
 

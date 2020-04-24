@@ -6,7 +6,11 @@ function FeaturedCategory(props) {
   return (
     <>
       <div className="TBMarg LHeight featured-container">
-        <img className="align-bot featured-img" src={props.image} />
+        <img
+          className="align-bot featured-img"
+          src={props.image}
+          alt="Classic Board Games"
+        />
         <div className="featured-overlay level is-mobile">
           <div className="level-item has-text-centered">
             <div className="line-space">

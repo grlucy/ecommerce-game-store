@@ -44,7 +44,7 @@ A website for a local game store that enables online transactions and curbside p
 
 - Events calendar with online classes and tournaments available for purchase
 - Video storage for purchased online classes and tournaments
-- Push notification reminders for curbside pickup scheduling
+- Push notification reminders for curbside pickup scheduling and events
 - Shipping option in addition to curbside pickup
 - Blog page
 
@@ -57,11 +57,7 @@ Stock images:
 - 'chess2.jpg' by [Charlie Solorzano on Unsplash](https://unsplash.com/photos/aeXK1IeVVoI)
 - 'puzzle.jpg' by [Joshua Hoehne on Unsplash](https://unsplash.com/photos/jAomkJlKwPI)
 - 'cards.jpg' by [Amanda Jones on Unsplash](https://unsplash.com/photos/P787-xixGio)
-- 'open.jpg' by [Mike Petrucci on Unsplash](https://unsplash.com/photos/c9FQyqIECds)
 - 'dragon.jpg' by [Clint Bustrillos on Unsplash](https://unsplash.com/photos/X-A-LJVAhzk)
-- 'chips.jpg' by [Amanda Jones on Unsplash](https://unsplash.com/photos/K2PAVcngNvY)
-- 'dominos.jpg' by [Jonathan Campos from Pexels](https://www.pexels.com/photo/close-up-photo-of-dominoes-4066131/)
-- 'pawns.jpg' by [Pixabay from Pexels](https://www.pexels.com/photo/focus-photo-of-4-wooden-pawn-figurine-209728/)
 - 'mahjong.jpg' by [Ellicia on Unsplash](https://unsplash.com/photos/rMm0dChKUaI)
 - 'tarot.jpg' from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Sola-Busca_tarot_deck)
 - 'puppypuzzle.jpg' photo by [Jairo Alzate on Unsplash](https://unsplash.com/photos/sssxyuZape8)

@@ -13,6 +13,7 @@ function News() {
               <img
                 src="assets/images/stock-photos/dice.jpg"
                 className="is-rounded"
+                alt="Dice"
               />
             </figure>
             <div>
