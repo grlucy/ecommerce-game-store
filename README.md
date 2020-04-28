@@ -12,6 +12,16 @@ A website for a local game store that enables online transactions and curbside p
 - a customer dashboard with order history
 - an admin dashboard with a built-in inventory management system
 
+## Demo
+
+### Customer Experience:
+
+![Customer Experience Demo](reference/demo-gifs/Ecommerce-Demo-large.gif)
+
+### Administrator Experience:
+
+![Administrator Experience Demo](reference/demo-gifs/Ecommerce-Admin-Demo-large.gif)
+
 ## User Story
 
 **_AS A_** tabletop gaming enthusiast who is practicing social distancing<br />
