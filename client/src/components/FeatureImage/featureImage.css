@@ -1,4 +1,7 @@
 #feature-img {
+  background-image: url("/assets/images/stock-photos/dragon.jpg");
+  background-size: cover;
+  background-position: center;
   height: 100%;
-  object-fit: cover;
+  width: 100%;
 }
