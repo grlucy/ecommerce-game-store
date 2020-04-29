@@ -10,15 +10,11 @@ function StoreItem(props) {
   const [redirect, setRedirect] = useState(false);
 
   const handleQtyChange = (event) => {
-    console.log("value: ", event.target.value);
-    if (event.target.value > event.target.max) {
-      setPurchaseQty(event.target.max);
-    } else if (event.target.value >= 0) {
+    if (event.target.value >= 0) {
       setPurchaseQty(event.target.value);
     } else {
       setPurchaseQty(0);
     }
-    console.log("purchaseQty: ", purchaseQty);
   };
 
   const cartButton = () => {

@@ -57,6 +57,17 @@ function Checkout({ products, emptyCart }) {
   };
 
   const buy = () => {
+    // check product quantities against inventory before initiating transaction
+    const notEnoughStock = products.filter(
+      (product) => Number(product.count) > product.quantity
+    );
+    if (notEnoughStock.length > 0) {
+      return setData({
+        ...data,
+        error: `Error: There are only ${notEnoughStock[0].quantity} of "${notEnoughStock[0].name}" in stock. Please decrease quantity and try again.`,
+      });
+    }
+
     setData({ ...data, loading: true });
     // send the nonce to your server
     // data.instance.requestPaymentMethod returns nonce
@@ -74,7 +85,6 @@ function Checkout({ products, emptyCart }) {
         };
         API.processPayment(userId, token, paymentData)
           .then((res) => {
-            console.log(res);
             const orderData = {
               products: products,
               pickup: data.pickup,
@@ -158,6 +168,14 @@ function Checkout({ products, emptyCart }) {
         style={{ display: error ? "" : "none" }}
       >
         {error}
+        <br />
+        <br />
+        <button
+          className="button is-danger"
+          onClick={() => setData({ ...data, error: "" })}
+        >
+          Got it!
+        </button>
       </div>
     );
   };
