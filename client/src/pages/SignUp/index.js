@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
+import { authenticate, isAuthenticated } from "../../utils/auth";
+
 import AuthForm from "../../components/AuthForm";
 import AuthInputField from "../../components/AuthForm/AuthInputField";
 import SubmitBtn from "../../components/Form/SubmitBtn";
@@ -14,6 +16,7 @@ function SignUp() {
     password: "",
     error: "",
     success: false,
+    redirectToSignIn: false,
   });
 
   const handleInputChange = (name) => (event) => {
@@ -32,13 +35,29 @@ function SignUp() {
         if (res.error) {
           setValues({ ...values, error: res.error, success: false });
         } else {
-          setValues({
-            name: "",
-            email: "",
-            password: "",
-            error: "",
-            success: true,
-          });
+          API.signIn({
+            email: values.email,
+            password: values.password,
+          })
+            .then((res) => {
+              if (res.error) {
+                setValues({ ...values, error: res.error });
+              } else {
+                authenticate(res.data, () => {
+                  setValues({
+                    ...values,
+                    redirectToSignIn: true,
+                  });
+                });
+              }
+            })
+            .catch((err) => {
+              setValues({
+                ...values,
+                error: err.response.data.error,
+                success: false,
+              });
+            });
         }
       })
       .catch((err) => {
@@ -59,6 +78,19 @@ function SignUp() {
           });
         }
       });
+  };
+
+  const { user } = isAuthenticated();
+
+  const redirectUser = () => {
+    if (values.redirectToSignIn) {
+      //redirect user appropriately after login
+      if (user && user.role === "Admin") {
+        return <Redirect to="/admin" />;
+      } else {
+        return <Redirect to="/account" />;
+      }
+    }
   };
 
   return (
@@ -95,12 +127,10 @@ function SignUp() {
         <HelpText toggle={values.error} textSize="5" color="is-danger">
           {values.error}
         </HelpText>
-        <HelpText toggle={values.success} textSize="5" color="is-success">
-          New account created. Please <Link to="/signin">Sign In</Link>.
-        </HelpText>
         <hr />
         <LinkBtn route="/signin">USE EXISTING ACCOUNT</LinkBtn>
       </AuthForm>
+      {redirectUser()}
     </>
   );
 }
