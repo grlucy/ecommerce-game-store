@@ -1,33 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../../utils/auth";
 import { Link } from "react-router-dom";
+import DatePicker from "react-date-picker";
+import TimePicker from "rc-time-picker";
+import moment from "moment";
 import API from "../../utils/API";
+import { disabledHours, firstAvailableDay, firstAvailableTime } from "../../utils/pickupHelpers";
 import DropIn from "braintree-web-drop-in-react";
 import AuthInputField from "../../components/AuthForm/AuthInputField";
+import 'rc-time-picker/assets/index.css';
 import "./style.css";
 
 function Checkout({ products, emptyCart }) {
+
   const [data, setData] = useState({
     loading: false,
     success: false,
-    pickup: "",
+    currentDate: new Date(),
+    pickupDate: firstAvailableDay(),
+    pickupTime: firstAvailableTime(firstAvailableDay()),
     clientToken: null,
     error: "",
     instance: {},
   });
 
+  // const [pickupDate, setPickupDate] = useState(new Date());
+
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
-  const handlePickupChange = (name) => (event) => {
-    setData({ ...data, pickup: event.target.value });
-  };
+  // const handlePickupChange = (name) => (event) => {
+  //   setData({ ...data, pickup: event.target.value });
+  // };
+
+  const handleDateChange = (date) => {
+    console.log("in the date change handler");
+    console.log(date);
+    setData({ ...data, pickupDate: date, pickupTime: firstAvailableTime(date) });
+  }
+
+  const handleTimeChange = (time) => {
+    setData({ ...data, pickupTime: time});
+  }
 
   const getToken = (userId, token) => {
     API.getBraintreeClientToken(userId, token).then((res) => {
       if (res.error) {
         setData({ ...data, error: res.error });
       } else {
+        console.log("Here comes the data... " + { ...data, clientToken: res.data.clientToken });
         setData({ ...data, clientToken: res.data.clientToken });
       }
     });
@@ -43,6 +64,16 @@ function Checkout({ products, emptyCart }) {
       return currentVal + nextVal.count * nextVal.price;
     }, 0);
   };
+
+  const getDisabledHours = () => {
+    return disabledHours(data.pickupDate);
+  }
+
+  const getMaxDate = () => {
+    let date = new Date();
+    date.setDate((date.getDate() + 5));
+    return date;
+  }
 
   const showCheckout = () => {
     return isAuthenticated() ? (
@@ -114,7 +145,7 @@ function Checkout({ products, emptyCart }) {
               }}
               onInstance={(instance) => (data.instance = instance)}
             />
-            <div id="pickup-form">
+            {/* <div id="pickup-form">
               <form>
                 <AuthInputField
                   name="pickup"
@@ -126,7 +157,35 @@ function Checkout({ products, emptyCart }) {
                   icon="fas fa-car"
                 />
               </form>
-            </div>
+            </div> */}
+            <DatePicker
+              onChange={handleDateChange}
+              value={data.pickupDate}
+              calendarIcon={<span style={{fontSize: 20}}><i className="far fa-calendar"></i></span>}
+              clearIcon={null}
+              minDate={firstAvailableDay()}
+              maxDate={getMaxDate()}
+              minDetail="month"
+              required={true}
+            />
+            <TimePicker
+              className="time-picker"
+              onChange={handleTimeChange}
+              value={data.pickupTime}
+              showSecond={false}
+              minuteStep={30}
+              disabledHours={getDisabledHours}
+              hideDisabledOptions={true}
+              use12Hours={true}
+              allowEmpty={false}
+            />
+            {/* <TimePicker
+              onChange={handleTimeChange}
+              value={data.pickupTime}
+              maxDetail="hour"
+              minTime="08:00:00"
+              maxTime="18:00:00"
+            /> */}
             <h2 className="title is-3">
               Total:{" "}
               <span className="has-text-danger">${getTotal().toFixed(2)}</span>
