@@ -1,46 +1,54 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { isAuthenticated } from "../../utils/auth";
 import { Link } from "react-router-dom";
-import DatePicker from "react-date-picker";
-import TimePicker from "rc-time-picker";
-import moment from "moment";
+import PickupSelect from "../PickupSelect";
 import API from "../../utils/API";
-import { disabledHours, firstAvailableDay, firstAvailableTime } from "../../utils/pickupHelpers";
+import { firstAvailablePickup } from "../../utils/pickupHelpers";
 import DropIn from "braintree-web-drop-in-react";
-import AuthInputField from "../../components/AuthForm/AuthInputField";
-import 'rc-time-picker/assets/index.css';
-import "./style.css";
 
 function Checkout({ products, emptyCart }) {
+
+  const initializePickup = () => {
+    const now = moment();
+    const pickup = firstAvailablePickup(now);
+    return pickup;
+  }
 
   const [data, setData] = useState({
     loading: false,
     success: false,
-    currentDate: new Date(),
-    pickupDate: firstAvailableDay(),
-    pickupTime: firstAvailableTime(firstAvailableDay()),
+    pickup: initializePickup(),
     clientToken: null,
     error: "",
     instance: {},
   });
 
-  // const [pickupDate, setPickupDate] = useState(new Date());
-
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
-  // const handlePickupChange = (name) => (event) => {
-  //   setData({ ...data, pickup: event.target.value });
-  // };
-
-  const handleDateChange = (date) => {
-    console.log("in the date change handler");
-    console.log(date);
-    setData({ ...data, pickupDate: date, pickupTime: firstAvailableTime(date) });
+  const handleDateChange = (event) => {
+    const dateStr = event.target.value;
+    const date = moment(dateStr, "M/D/YYYY");
+    const pickup = firstAvailablePickup(date);
+    setData({ ...data, pickup: pickup });
   }
 
-  const handleTimeChange = (time) => {
-    setData({ ...data, pickupTime: time});
+  const handleTimeChange = (event) => {
+    const timeStr = event.target.value;
+    const time = moment(timeStr, "h:mm a");
+    const newDate = moment();
+    newDate.set({
+      "year": data.pickup.get("year"),
+      "month": data.pickup.get("month"),
+      "date": data.pickup.get("date"),
+      "hour": time.get("hour"),
+      "minute": time.get("minute"),
+      "second": 0,
+      "millisecond": 0
+    });
+
+    setData({ ...data, pickup: newDate });
   }
 
   const getToken = (userId, token) => {
@@ -48,7 +56,6 @@ function Checkout({ products, emptyCart }) {
       if (res.error) {
         setData({ ...data, error: res.error });
       } else {
-        console.log("Here comes the data... " + { ...data, clientToken: res.data.clientToken });
         setData({ ...data, clientToken: res.data.clientToken });
       }
     });
@@ -64,16 +71,6 @@ function Checkout({ products, emptyCart }) {
       return currentVal + nextVal.count * nextVal.price;
     }, 0);
   };
-
-  const getDisabledHours = () => {
-    return disabledHours(data.pickupDate);
-  }
-
-  const getMaxDate = () => {
-    let date = new Date();
-    date.setDate((date.getDate() + 5));
-    return date;
-  }
 
   const showCheckout = () => {
     return isAuthenticated() ? (
@@ -108,7 +105,7 @@ function Checkout({ products, emptyCart }) {
             console.log(res);
             const orderData = {
               products: products,
-              pickup: data.pickup,
+              pickup: data.pickup.format("M/D @ h:mm a"),
               transaction_id: res.data.transaction.id,
               amount: res.data.transaction.amount,
             };
@@ -145,47 +142,11 @@ function Checkout({ products, emptyCart }) {
               }}
               onInstance={(instance) => (data.instance = instance)}
             />
-            {/* <div id="pickup-form">
-              <form>
-                <AuthInputField
-                  name="pickup"
-                  label="Enter Desired Pickup Time"
-                  type="text"
-                  placeholder="ex. 4/25 @ 12:00pm"
-                  onChange={handlePickupChange}
-                  value={data.pickup}
-                  icon="fas fa-car"
-                />
-              </form>
-            </div> */}
-            <DatePicker
-              onChange={handleDateChange}
-              value={data.pickupDate}
-              calendarIcon={<span style={{fontSize: 20}}><i className="far fa-calendar"></i></span>}
-              clearIcon={null}
-              minDate={firstAvailableDay()}
-              maxDate={getMaxDate()}
-              minDetail="month"
-              required={true}
+            <PickupSelect
+              pickup={data.pickup}
+              onDateChange={handleDateChange}
+              onTimeChange={handleTimeChange}
             />
-            <TimePicker
-              className="time-picker"
-              onChange={handleTimeChange}
-              value={data.pickupTime}
-              showSecond={false}
-              minuteStep={30}
-              disabledHours={getDisabledHours}
-              hideDisabledOptions={true}
-              use12Hours={true}
-              allowEmpty={false}
-            />
-            {/* <TimePicker
-              onChange={handleTimeChange}
-              value={data.pickupTime}
-              maxDetail="hour"
-              minTime="08:00:00"
-              maxTime="18:00:00"
-            /> */}
             <h2 className="title is-3">
               Total:{" "}
               <span className="has-text-danger">${getTotal().toFixed(2)}</span>

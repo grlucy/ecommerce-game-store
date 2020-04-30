@@ -1,11 +1,20 @@
 import moment from "moment";
 
-const dateIsToday = (date) => {
-  const today = new Date();
-  return today.toDateString() === date.toDateString();
+export const availableDays = () => {
+  let date = moment();
+  let available = [];
+  if (availableHours(date).length > 0) {
+    available.push(date);
+  }
+  for (let i = 1; i < 5; i++) {
+    let d = moment();
+    d.add(i, "days");
+    available.push(d);
+  }
+  return available;
 }
 
-export const disabledHours = (date) => {
+export const availableHours = (date) => {
 
   const openHours = [
     { //Sunday
@@ -38,31 +47,42 @@ export const disabledHours = (date) => {
     }
   ];
 
-  let hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
+  //create array of time objects with each hour and half hour of the day
+  const times = [];
+  for (let i = 0; i < 24; i++) {
+    times.push({
+      hours: i,
+      mins: 0
+    });
+    times.push({
+      hours: i,
+      mins: 30
+    });
+  }
+  let iterator = date.clone();
+  iterator.set("minute", 0);
+  iterator.set("second", 0);
+  iterator.set("millisecond", 0);
+  const currentDate = moment();
 
-  return hours.filter((hour) => {
-    return (hour < openHours[date.getDay()].open ||
-    hour >= openHours[date.getDay()].close ||
-    (dateIsToday(date) && hour < currentHour + 2));
+  return times.filter((time) => {
+    return (time.hours >= openHours[iterator.day()].open &&
+    time.hours < openHours[iterator.day()].close &&
+    iterator.set("hour", time.hours).set("minute", time.mins).diff(currentDate, "hours", true) > 1);
   });
 }
 
-export const firstAvailableDay = () => {
-  let date = new Date();
-  if (disabledHours(date).length === 24) {
-    date.setDate((date.getDate() + 1));
-  }
-  return date;
-}
 
-export const firstAvailableTime = (date) => {
-  const disabled = disabledHours(date);
-  for ( let i = 0; i < 24; i++ ) {
-    if ( disabled.indexOf(i) === -1 ) {
-      return moment().hour(i).minute(0);
-    }
-  } 
+export const firstAvailablePickup = (date) => {
+  if (availableHours(date).length === 0) {
+    date.add(1, "day");
+  }
+  const available = availableHours(date);
+  date.set("hour", available[0].hours);
+  date.set("minute", available[0].mins);
+  date.set("second", 0);
+  date.set("millisecond", 0);
+
+  return date;
 }
 

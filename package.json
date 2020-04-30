@@ -33,8 +33,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
-    "rc-time-picker": "^3.7.3",
-    "react-date-picker": "^8.0.1",
     "uuid": "^7.0.3"
   }
 }
