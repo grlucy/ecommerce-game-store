@@ -7,7 +7,9 @@ function CartItem(props) {
 
   return (
     <div className="container cart-item">
-      <p className="title is-size-3 is-size-4-mobile is-hidden-desktop">{name}</p>
+      <p className="title is-size-3 is-size-4-mobile is-hidden-desktop">
+        {name}
+      </p>
       <div className="columns is-mobile">
         <div className="column is-half-mobile is-two-fifths-desktop is-one-third-fullhd">
           <img className="cart-img" src={image} alt={"Image of " + name} />
@@ -26,9 +28,7 @@ function CartItem(props) {
             <div className="column price-column">
               <div className="field has-addons quantity-controller">
                 <div className="control">
-                  <button className="button is-small is-static">
-                    Qty:
-                  </button>
+                  <button className="button is-small is-static">Qty:</button>
                 </div>
                 <div className="control">
                   {count > 0 ? (
@@ -38,9 +38,6 @@ function CartItem(props) {
                       onChange={onCountChange(_id)}
                       value={count}
                       max={quantity}
-                      onKeyPress={(e) => {
-                        e.preventDefault();
-                      }}
                     />
                   ) : (
                     <input

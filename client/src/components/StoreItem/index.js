@@ -99,9 +99,6 @@ function StoreItem(props) {
                                 onChange={handleQtyChange}
                                 value={purchaseQty}
                                 max={quantity}
-                                onKeyPress={(e) => {
-                                  e.preventDefault();
-                                }}
                               />
                             ) : (
                               <input
