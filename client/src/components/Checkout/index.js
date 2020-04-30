@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { isAuthenticated } from "../../utils/auth";
 import { Link } from "react-router-dom";
+import PickupSelect from "../PickupSelect";
 import API from "../../utils/API";
+import { firstAvailablePickup } from "../../utils/pickupHelpers";
 import DropIn from "braintree-web-drop-in-react";
-import AuthInputField from "../../components/AuthForm/AuthInputField";
-import "./style.css";
 
 function Checkout({ products, emptyCart }) {
+
+  const initializePickup = () => {
+    const now = moment();
+    const pickup = firstAvailablePickup(now);
+    return pickup;
+  }
+
   const [data, setData] = useState({
     loading: false,
     success: false,
-    pickup: "",
+    pickup: initializePickup(),
     clientToken: null,
     error: "",
     instance: {},
@@ -19,9 +27,29 @@ function Checkout({ products, emptyCart }) {
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
-  const handlePickupChange = (name) => (event) => {
-    setData({ ...data, pickup: event.target.value });
-  };
+  const handleDateChange = (event) => {
+    const dateStr = event.target.value;
+    const date = moment(dateStr, "M/D/YYYY");
+    const pickup = firstAvailablePickup(date);
+    setData({ ...data, pickup: pickup });
+  }
+
+  const handleTimeChange = (event) => {
+    const timeStr = event.target.value;
+    const time = moment(timeStr, "h:mm a");
+    const newDate = moment();
+    newDate.set({
+      "year": data.pickup.get("year"),
+      "month": data.pickup.get("month"),
+      "date": data.pickup.get("date"),
+      "hour": time.get("hour"),
+      "minute": time.get("minute"),
+      "second": 0,
+      "millisecond": 0
+    });
+
+    setData({ ...data, pickup: newDate });
+  }
 
   const getToken = (userId, token) => {
     API.getBraintreeClientToken(userId, token).then((res) => {
@@ -87,7 +115,7 @@ function Checkout({ products, emptyCart }) {
           .then((res) => {
             const orderData = {
               products: products,
-              pickup: data.pickup,
+              pickup: data.pickup.format("M/D @ h:mm a"),
               transaction_id: res.data.transaction.id,
               amount: res.data.transaction.amount,
             };
@@ -124,19 +152,11 @@ function Checkout({ products, emptyCart }) {
               }}
               onInstance={(instance) => (data.instance = instance)}
             />
-            <div id="pickup-form">
-              <form>
-                <AuthInputField
-                  name="pickup"
-                  label="Enter Desired Pickup Time"
-                  type="text"
-                  placeholder="ex. 4/25 @ 12:00pm"
-                  onChange={handlePickupChange}
-                  value={data.pickup}
-                  icon="fas fa-car"
-                />
-              </form>
-            </div>
+            <PickupSelect
+              pickup={data.pickup}
+              onDateChange={handleDateChange}
+              onTimeChange={handleTimeChange}
+            />
             <h2 className="title is-3">
               Total:{" "}
               <span className="has-text-danger">${getTotal().toFixed(2)}</span>
