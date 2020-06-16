@@ -47,7 +47,10 @@ exports.productValidator = (req, res, next) => {
     .isLength({ min: 1, max: 1000 })
     .withMessage("Description must be 1,000 characters or less");
   if (req.body.image !== "") {
-    req.check("image").isURL().withMessage("Image must be URL");
+    req
+      .check("image")
+      .contains("/")
+      .withMessage("Image must be URL or relative URL");
   } else {
     req.body.image = "https://via.placeholder.com/500?text=No+Image+Found";
   }
