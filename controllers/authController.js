@@ -59,6 +59,7 @@ exports.signout = (req, res) => {
 exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET,
   userProperty: "auth",
+  algorithms: ["RS256"]
 });
 
 // Middleware that ensures a token can only access matching user id's data
