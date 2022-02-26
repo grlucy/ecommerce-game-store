@@ -16,18 +16,18 @@
   "author": "Gina Lucy, Ben Ferriman",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.18.7"
+    "concurrently": "^6.5.1",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "braintree": "^2.22.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.1.0",
     "express-validator": "^5.3.1",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",

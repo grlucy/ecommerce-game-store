@@ -1,5 +1,5 @@
 #feature-img {
-  background-image: url("/assets/images/stock-photos/dragon.jpg");
+  background-image: url("/public/assets/images/stock-photos/dragon.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;

@@ -30,18 +30,18 @@ A website for a local game store that enables online transactions and curbside p
 
 ## Technologies
 
-|   Front End   |                Back End                |      Testing      | Deployment |    Storage     |
-| :-----------: | :------------------------------------: | :---------------: | :--------: | :------------: |
-|     React     |               JavaScript               |      Postman      |    Git     | AWS S3 Buckets |
-|     Axios     |                MongoDB                 |      Robo 3T      |   Heroku   |                |
-| React Router  |                Mongoose                | Braintree Sandbox |    mLab    |                |
-|      CSS      |                Express                 |  PayPal Sandbox   |            |                |
-|     Bulma     |                Node.js                 |                   |            |                |
-|     HTML      |     Password hashing: crypto, uuid     |                   |            |                |
-| Formspree API |           Express-validator            |                   |            |                |
-|               | User tokens: express-jwt, jsonwebtoken |                   |            |                |
-|               |             Cookie-parser              |                   |            |                |
-|               |                 Dotenv                 |                   |            |                |
+|   Front End   |                Back End                |      Testing      | Deployment |
+| :-----------: | :------------------------------------: | :---------------: | :--------: |
+|     React     |               JavaScript               |      Postman      |    Git     |
+|     Axios     |                MongoDB                 |      Robo 3T      |   Heroku   |
+| React Router  |                Mongoose                | Braintree Sandbox |    mLab    |
+|      CSS      |                Express                 |  PayPal Sandbox   |            |
+|     Bulma     |                Node.js                 |                   |            |
+|     HTML      |     Password hashing: crypto, uuid     |                   |            |
+| Formspree API |           Express-validator            |                   |            |
+|               | User tokens: express-jwt, jsonwebtoken |                   |            |
+|               |             Cookie-parser              |                   |            |
+|               |                 Dotenv                 |                   |            |
 
 |     Project Management     | Wireframing & Graphics |
 | :------------------------: | :--------------------: |
@@ -85,7 +85,7 @@ Tutorials:
 
 ## License
 
-© 2020 Gina Lucy & Ben Ferriman
+© 2022 Gina Lucy & Ben Ferriman
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
