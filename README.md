@@ -30,18 +30,18 @@ A website for a local game store that enables online transactions and curbside p
 
 ## Technologies
 
-|   Front End   |                Back End                |      Testing      | Deployment |
-| :-----------: | :------------------------------------: | :---------------: | :--------: |
-|     React     |               JavaScript               |      Postman      |    Git     |
-|     Axios     |                MongoDB                 |      Robo 3T      |   Heroku   |
-| React Router  |                Mongoose                | Braintree Sandbox |    mLab    |
-|      CSS      |                Express                 |  PayPal Sandbox   |            |
-|     Bulma     |                Node.js                 |                   |            |
-|     HTML      |     Password hashing: crypto, uuid     |                   |            |
-| Formspree API |           Express-validator            |                   |            |
-|               | User tokens: express-jwt, jsonwebtoken |                   |            |
-|               |             Cookie-parser              |                   |            |
-|               |                 Dotenv                 |                   |            |
+|   Front End   |                Back End                |      Testing      |  Deployment   |
+| :-----------: | :------------------------------------: | :---------------: | :-----------: |
+|     React     |               JavaScript               |      Postman      |      Git      |
+|     Axios     |                MongoDB                 |      Robo 3T      |    Heroku     |
+| React Router  |                Mongoose                | Braintree Sandbox | MongoDB Atlas |
+|      CSS      |                Express                 |  PayPal Sandbox   |               |
+|     Bulma     |                Node.js                 |                   |               |
+|     HTML      |     Password hashing: crypto, uuid     |                   |               |
+| Formspree API |           Express-validator            |                   |               |
+|               | User tokens: express-jwt, jsonwebtoken |                   |               |
+|               |             Cookie-parser              |                   |               |
+|               |                 Dotenv                 |                   |               |
 
 |     Project Management     | Wireframing & Graphics |
 | :------------------------: | :--------------------: |
