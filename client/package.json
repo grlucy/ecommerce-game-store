@@ -19,7 +19,8 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.0",
+    "babel-plugin-transform-remove-console": "^6.9.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,8 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-plugin-transform-remove-console": "^6.9.4"
   }
 }
