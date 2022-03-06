@@ -16,10 +16,10 @@
   "author": "Gina Lucy, Ben Ferriman",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^6.5.1",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "concurrently": "^6.5.1",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "braintree": "^2.22.0",
